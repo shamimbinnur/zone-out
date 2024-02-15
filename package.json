@@ -1,7 +1,11 @@
 {
-  "name": "zoneout",
-  "version": "0.1.0",
+  "name": "zone-out",
+  "version": "1.0.0",
   "private": true,
+  "author": {
+    "name": "Shamim Bin Nur",
+    "email": "me@shamimbinnur.me"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
