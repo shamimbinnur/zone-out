@@ -7,6 +7,13 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Zone Out",
   description: "Have you been zoning out lately?",
+  metadataBase: new URL("https://zoneout.me"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/en-US",
+    }
+  },
 };
 
 export default function RootLayout({
