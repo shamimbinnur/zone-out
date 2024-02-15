@@ -4,8 +4,10 @@
   "private": true,
   "author": {
     "name": "Shamim Bin Nur",
-    "email": "me@shamimbinnur.me"
+    "email": "me@shamimbinnur.me",
+    "url": "https://shamimbinnur.me"
   },
+  "homepage": "https://zoneout.me",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
