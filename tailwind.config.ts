@@ -7,13 +7,20 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-  
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        "out-green-1000": "#0E3A0F",
+        "out-green-800": "#358B53",
+        "out-green-600": "#538C67",
+        "out-green-400": "#4CA069",
+        "out-green-200": "#78B98E",
       },
+      fontFamily: {
+        inter: ["Inter", "sans-serif"],
+      },
+      backgroundImage: {
+        'forest': "url('/images/forest.png')",
+      }
     },
   },
   plugins: [],
