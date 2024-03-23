@@ -47,7 +47,7 @@ const Timer = () => {
 
 
   return (
-    <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-18 gap-y-16 sm:justify-center items-center">
+    <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-36 sm:pt-18 gap-y-16 sm:justify-center items-center">
       <p className="text-out-green-200"> <span className="text-3xl font-bold">+{counter} </span> <span className="text-xl sm:text-2xl">pomodoro</span></p>
 
       <div className="max-w-[660px] px-10 py-9 flex justify-center rounded-[52px] relative">
@@ -73,14 +73,14 @@ const Timer = () => {
           style={timerContainerAnimationProps}
           className="flex gap-8 transition-all overflow-hidden justify-start items-center cursor-default">
             <div>
-              <p className="sm:text-[182px] sm:w-56 text-7xl font-medium text-white">{min < 10 ? `0${min}` : min}</p>
+              <p className="sm:text-[182px] sm:w-56 text-[90px] font-semibold sm:font-medium text-white">{min < 10 ? `0${min}` : min}</p>
             </div>
             
             <div className="bg-out-green-200 h-[90px] rounded-sm w-[4px]">
             </div>
 
             <div>
-            <p className="sm:text-[182px] text-7xl sm:w-56 font-medium text-white">{secs < 10 ? `0${secs}` : secs}</p>
+            <p className="sm:text-[182px] text-8xl sm:w-56 text-[90px] font-semibold sm:font-medium text-white">{secs < 10 ? `0${secs}` : secs}</p>
             </div>
           </animated.div>
         </div>
