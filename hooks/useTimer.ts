@@ -15,7 +15,7 @@ type timerType = {
 }
 
 const useTimer = (): timerType => {
-  const [minutes, setMinutes] = useState<number>(25)
+  const [minutes, setMinutes] = useState<number>(1)
   const [seconds, setSeconds] = useState<number>(0)
   const [isActive, setIsActive] = useState<boolean>(false)
   const [counter, setCounter] = useState<number>(0)
