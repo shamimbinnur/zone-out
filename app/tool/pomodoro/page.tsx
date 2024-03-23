@@ -5,7 +5,7 @@ import React from 'react'
 
 const Page = () => {
   return (
-    <main className="h-screen relative">
+    <main>
       <Background>
         <Timer />
         <Footer />

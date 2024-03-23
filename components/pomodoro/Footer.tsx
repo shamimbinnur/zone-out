@@ -1,8 +1,16 @@
+"use Client"
 import React from 'react'
 
 const Footer = () => {
+
   return (
-    <div></div>
+    <footer>
+      <div className="flex px-8">
+        <section></section>
+        <section></section>
+        <section></section>
+      </div>
+    </footer>
   )
 }
 
