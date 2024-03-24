@@ -25,13 +25,18 @@ const Timer = () => {
   const resetBtnAnimationProps = useSpring({
     opacity: isResetBtnVisible ? 1 : 0,
     transform: isResetBtnVisible ? 'translateY(0)' : 'translateY(-40%)',
-    config: { duration: 200 },
-    delay: 50
+    config: { 
+      duration: 100,
+      transition: 'ease-in'
+     },
   });
 
   const timerContainerAnimationProps = useSpring({
     transform: isActive ? 'translateY(0)' : 'translateY(8%)',
-    config: { duration: 200 },
+    config: {
+      duration: 100,
+      transition: 'ease-in-out'
+    },
     from: {
       transform: 'translateY(0)',
     }
