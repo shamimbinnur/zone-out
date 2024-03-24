@@ -42,6 +42,17 @@ const Timer = () => {
     }
   })
 
+  const timePillContainer = useSpring({
+    opacity: isActive ? 0 : 1,
+    config: {
+      duration: 100,
+      transition: 'ease-in-out'
+    },
+    from: {
+      opacity: 0
+    }
+  })
+
   useEffect(() => {
     if (isActive) {
       setIsResetBtnVisible(false)
@@ -50,10 +61,23 @@ const Timer = () => {
     }
   }, [isActive])
 
+  const stAr=["25","50","75","100"]
 
   return (
     <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-36 sm:pt-18 gap-y-16 sm:justify-center items-center">
-      <p className="text-out-green-200"> <span className="text-3xl font-bold">+{counter} </span> <span className="text-xl sm:text-2xl">pomodoro</span></p>
+      <animated.div
+      style={timePillContainer}
+      className="flex gap-x-3">
+        {
+          stAr.map((item, index) => (
+            <div key={item} className={
+              `py-1 w-8 flex justify-center items-center pointer-events-none text-out-green-600 font-bold rounded-full bg-white opacity-10 ${index+1 <= counter ? "opacity-70 text-out-green-1000" : ""}`
+            }>
+              <p className="text-xs">{item}</p>
+            </div>
+          ))
+        } 
+      </animated.div>
 
       <div className="max-w-[660px] px-10 py-9 flex justify-center rounded-[52px] relative">
         <div className="h-full w-full rounded-[42px] sm:rounded-[52px] absolute top-0 opacity-25 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-out-green-600 border border-out-green-200 to-out-green-400 drop-shadow-md"></div>

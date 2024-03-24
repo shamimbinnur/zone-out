@@ -15,21 +15,21 @@ type timerType = {
 }
 
 const useTimer = (): timerType => {
-  const [minutes, setMinutes] = useState<number>(1)
-  const [seconds, setSeconds] = useState<number>(0)
+  const [minutes, setMinutes] = useState<number>(0)
+  const [seconds, setSeconds] = useState<number>(8)
   const [isActive, setIsActive] = useState<boolean>(false)
   const [counter, setCounter] = useState<number>(0)
   const [status, setStatus] = useState<statusType>("POMO")
 
   useEffect(() => {
     let interval:any;
-
     if (isActive) {
       interval = setInterval(() => {
         if (seconds === 0) {
           if (minutes === 0) {
             if (status == "POMO") {
               setCounter(counter + 1)
+              setIsActive(false)
             }
             clearInterval(interval)
           } else {
@@ -48,14 +48,18 @@ const useTimer = (): timerType => {
   }, [isActive, minutes, seconds])
 
   const toggleTimer = () => {
+    if (minutes === 0 && seconds === 0){
+      setIsActive(false)
+      resetTimer()
+    }
     setStatus("POMO");
     setIsActive(!isActive)
   };
 
   const resetTimer = () => {
     setIsActive(false)
-    setMinutes(25)
-    setSeconds(0)
+    setMinutes(0)
+    setSeconds(8)
   };
 
   const increaseMinutes = () => {
