@@ -13,6 +13,7 @@ const Timer = () => {
     secs,
     isActive,
     counter,
+    isPromoComplete,
     startShortBreak,
     startLongBreak,
     toggleTimer,
@@ -53,6 +54,18 @@ const Timer = () => {
     }
   })
 
+  const handleButtonText = () => {  
+    if (isActive) {
+      return "Pause"
+    } else {
+      if (isPromoComplete) {
+        return "Restart"
+      } else {
+        return "Start"
+      }
+    }
+  }
+
   useEffect(() => {
     if (isActive) {
       setIsResetBtnVisible(false)
@@ -64,19 +77,17 @@ const Timer = () => {
   const stAr=["25","50","75","100"]
 
   return (
-    <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-36 sm:pt-18 gap-y-16 sm:justify-center items-center">
+    <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-36 sm:pt-1 gap-y-16 sm:justify-center items-center">
       <animated.div
       style={timePillContainer}
       className="flex gap-x-3">
-        {
-          stAr.map((item, index) => (
-            <div key={item} className={
-              `py-1 w-8 flex justify-center items-center pointer-events-none text-out-green-600 font-bold rounded-full bg-white opacity-10 ${index+1 <= counter ? "opacity-70 text-out-green-1000" : ""}`
-            }>
-              <p className="text-xs">{item}</p>
-            </div>
-          ))
-        } 
+        {stAr.map((item, index) => (
+          <div key={item} className={
+            `py-1 w-8 flex justify-center select-none items-center pointer-events-none text-out-green-600 font-bold rounded-full bg-white opacity-10 ${index+1 <= counter ? "opacity-70 text-out-green-1000" : ""}`
+          }>
+            <p className="text-xs">{item}</p>
+          </div>
+        ))} 
       </animated.div>
 
       <div className="max-w-[660px] px-10 py-9 flex justify-center rounded-[52px] relative">
@@ -100,7 +111,7 @@ const Timer = () => {
 
           <animated.div
           style={timerContainerAnimationProps}
-          className="flex gap-8 transition-all overflow-hidden justify-start items-center cursor-default">
+          className="flex gap-8 transition-all select-none overflow-hidden justify-start items-center cursor-default">
             <div>
               <p className="sm:text-[182px] sm:w-56 text-[90px] font-semibold sm:font-medium text-white">{min < 10 ? `0${min}` : min}</p>
             </div>
@@ -117,14 +128,14 @@ const Timer = () => {
 
       <div>
         <animated.div
-        className="bg-out-green-1000 transition-all text-sm sm:text-base font-bold text-out-green-200 py-2 flex items-center justify-center gap-5 sm:gap-x-7 px-7 rounded-[52px]">
+          className="bg-out-green-1000 select-none transition-all text-sm sm:text-base font-bold text-out-green-200 py-2 flex items-center justify-center gap-5 sm:gap-x-7 px-7 rounded-[52px]">
           {!isActive && 
           <button onClick={startLongBreak} >
             Long Break
           </button>}
 
           <button onClick={toggleTimer} className="text-xl sm:text-3xl">
-            {isActive ? "Pause" : "Start"}
+            {handleButtonText()}
             {isActive && <span className="animate-pulse">.</span>}
           </button>
 

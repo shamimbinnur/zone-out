@@ -7,6 +7,7 @@ type timerType = {
   secs: number,
   isActive: boolean,
   counter: number,
+  isPromoComplete: boolean,
   startShortBreak: () => void,
   startLongBreak: () => void,
   increaseMinutes: () => void,
@@ -14,12 +15,15 @@ type timerType = {
   resetTimer: () => void
 }
 
+const POMO_MIN = 25
+
 const useTimer = (): timerType => {
-  const [minutes, setMinutes] = useState<number>(0)
-  const [seconds, setSeconds] = useState<number>(8)
+  const [minutes, setMinutes] = useState<number>(POMO_MIN)
+  const [seconds, setSeconds] = useState<number>(0)
   const [isActive, setIsActive] = useState<boolean>(false)
   const [counter, setCounter] = useState<number>(0)
   const [status, setStatus] = useState<statusType>("POMO")
+  const [isPromoComplete, setIsPromoComplete] = useState<boolean>(false)
 
   useEffect(() => {
     let interval:any;
@@ -30,6 +34,7 @@ const useTimer = (): timerType => {
             if (status == "POMO") {
               setCounter(counter + 1)
               setIsActive(false)
+              setIsPromoComplete(true)
             }
             clearInterval(interval)
           } else {
@@ -57,9 +62,10 @@ const useTimer = (): timerType => {
   };
 
   const resetTimer = () => {
+    setIsPromoComplete(false)
     setIsActive(false)
-    setMinutes(0)
-    setSeconds(8)
+    setMinutes(POMO_MIN)
+    setSeconds(0)
   };
 
   const increaseMinutes = () => {
@@ -85,6 +91,7 @@ const useTimer = (): timerType => {
     secs: seconds,
     isActive,
     counter,
+    isPromoComplete,
     startShortBreak,
     startLongBreak,
     increaseMinutes,
