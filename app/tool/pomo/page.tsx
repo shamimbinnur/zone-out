@@ -1,6 +1,6 @@
-import Background from '@/components/pomodoro/Background'
-import Footer from '@/components/pomodoro/Footer'
-import Timer from '@/components/pomodoro/Timer'
+import Background from '@/components/pomo/Background'
+import Footer from '@/components/pomo/Footer'
+import Timer from '@/components/pomo/Timer'
 import React from 'react'
 
 const Page = () => {

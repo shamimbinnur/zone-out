@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react'
 import { GrPowerReset } from 'react-icons/gr'
 import { IoMdAdd } from 'react-icons/io'
 import { animated } from '@react-spring/web'
-import Head from 'next/head'
+import ActionBtnGroup from './ActionBtnGroup'
+import DocTitle from '../common/DocTitle'
 
 const Timer = () => {
   const {
@@ -84,9 +85,7 @@ const Timer = () => {
 
   return (
     <>
-      <Head>
-        <title>eee{`${min} : ${secs}`}</title>
-      </Head>
+      <DocTitle documentTitle={`${min} : ${secs}`} />
       <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-36 gap-y-16 sm:pt-72 items-center">
         <animated.div
         style={timePillContainer}
@@ -103,7 +102,7 @@ const Timer = () => {
         <div className="max-w-[660px] px-10 py-6 flex justify-center ring-1 ring-slate-50 ring-opacity-40 rounded-3xl sm:rounded-[52px] relative">
           <div className="h-full w-full rounded-3xl sm:rounded-[52px] absolute top-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[rgba(83, 140, 103, 0.28)] border-out-green-200 to-[rgba(76, 160, 105, 0.26)] opacity-30 drop-shadow-md"></div>
           <div className="flex flex-col relative items-center ">
-            <div className="w-full absolute flex justify-between">
+            <section className="w-full absolute flex justify-between">
               <animated.div
               style={resetBtnAnimationProps}
               onClick={increaseMinutes}
@@ -117,7 +116,7 @@ const Timer = () => {
               className="bg-out-green-200 ring-slate-50 ring-1 ring-opacity-30 bg-opacity-30 p-1 group cursor-pointer sm:text-xl sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 hover:bg-opacity-50 rounded-full flex items-center justify-center">
                 <GrPowerReset className="-rotate-180 group-hover:rotate-0 ease-out transition duration-500"/>
               </animated.div>
-            </div>
+            </section>
             
             <animated.div
             style={timerContainerAnimationProps}
@@ -135,25 +134,14 @@ const Timer = () => {
             </animated.div>
           </div>
         </div>
-        <div>
-          <animated.div
-            className="bg-out-green-1000 select-none transition-all text-sm sm:text-base font-bold text-out-green-400 py-2 flex items-center justify-center gap-5 sm:gap-x-7 px-7 rounded-[52px]">
-            {!isActive && 
-            <button onClick={startLongBreak} >
-              Long Break
-            </button>}
 
-            <button onClick={toggleTimer} className="text-xl sm:text-3xl">
-              {handleButtonText()}
-              {isActive && <span className="animate-pulse text-red-500"> .</span>}
-            </button>
-
-            {!isActive &&
-            <button onClick={startShortBreak} >
-              Short Break
-            </button>}
-          </animated.div>
-        </div>
+        <ActionBtnGroup 
+          startShortBreak={startShortBreak}
+          startLongBreak={startLongBreak}
+          toggleTimer={toggleTimer}
+          handleButtonText={handleButtonText}
+          isActive={isActive}
+        />
       </section>
     </>
   )
