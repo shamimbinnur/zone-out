@@ -10,10 +10,10 @@ const config: Config = {
     extend: {
       colors: {
         "out-green-1000": "#0E3A0F",
-        "out-green-800": "#358B53",
+        "out-green-800": "#41A563",
         "out-green-600": "#538C67",
         "out-green-400": "#4CA069",
-        "out-green-200": "#78B98E",
+        "out-green-200": "#7ED09A",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
