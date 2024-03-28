@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/tool/pomodoro',
+        destination: '/tool/pomo',
         permanent: false,
       },
     ];
