@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IE',
     url: 'https://zoneout.me',
-    title: 'Zone out | Curated collection of your ultimate productivity tools',
+    title: 'Zone out',
     siteName: 'Zone uut',
     description: "Curated collection of your ultimate productivity tools",
     images: [
