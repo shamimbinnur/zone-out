@@ -5,9 +5,10 @@ import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
+const metaDescription = "Zone Out: Your ultimate productivity solution. Uniting a suite of powerful tools, Zone Out empowers you to focus deeply on your tasks, preventing burnout and maximizing efficiency."
 export const metadata: Metadata = {
-  title: "Zone out",
-  description: "Curated collection of your ultimate productivity tools",
+  title: "Zone Out",
+  description: metaDescription,
   metadataBase: new URL("https://zoneout.me"),
   alternates: {
     canonical: "/",
@@ -20,31 +21,31 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IE',
     url: 'https://zoneout.me',
-    title: 'Zone out',
-    siteName: 'Zone uut',
-    description: "Curated collection of your ultimate productivity tools",
+    title: 'Zone Out',
+    siteName: 'Zone Out',
+    description: metaDescription,
     images: [
       {
         url: `${process.env.MY_DOMAIN}/images/og.png` || "",
         width: 1200,
         height: 630,
-        alt: 'Zone out',
+        alt: 'Zone Out',
       },
     ],
   },
 
   // Twitter
   twitter: {
-    title: 'Zone out',
+    title: 'Zone Out',
     site: '@zoneout.me',
     card: 'summary_large_image',
-    description: "Curated collection of your ultimate productivity tools",
+    description: metaDescription,
     images: [
       {
         url: `${process.env.MY_DOMAIN}/images/og.png` || "",
         width: 1200,
         height: 630,
-        alt: 'Zone out',
+        alt: 'Zone Out',
       },
     ],
   },
