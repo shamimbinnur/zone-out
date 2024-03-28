@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Zone out",
-  description: "Have you been zoning out lately?",
+  description: "Curated collection of your ultimate productivity tools",
   metadataBase: new URL("https://zoneout.me"),
   alternates: {
     canonical: "/",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
   // Twitter
   twitter: {
-    title: 'Zone out | Curated collection of your ultimate productivity tools',
+    title: 'Zone out',
     site: '@zoneout.me',
     card: 'summary_large_image',
     description: "Curated collection of your ultimate productivity tools",
