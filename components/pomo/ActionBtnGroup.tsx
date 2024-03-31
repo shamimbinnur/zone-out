@@ -64,7 +64,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       <div  className="w-[160px] py-1 mx-auto bg-out-green-1000 rounded-[52px] overflow-x-hidden">
         <animated.div
           style={props}
-          className="select-none mx-auto text-sm sm:text-base font-bold text-out-green-400 flex items-center justify-center gap-5 sm:gap-x-14"
+          className="select-none mx-auto text-base font-bold text-out-green-400 flex items-center justify-center gap-x-14"
           >
           
           {!isActive && 
@@ -72,7 +72,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
             Long Break
           </button>}
 
-          <button onClick={toggleTimer} className="text-xl sm:text-3xl">
+          <button onClick={toggleTimer} className="text-3xl">
             {handleButtonText()}
             {isActive && <span className="animate-pulse text-red-500"> .</span>}
           </button>
