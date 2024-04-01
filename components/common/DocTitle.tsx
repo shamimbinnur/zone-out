@@ -9,7 +9,7 @@ const DocTitle: FC<DocTitleProps> = ({
   documentTitle
 }) => {
   return (
-    <Head>{"documentTitle" || "Zone out"}</Head>
+    <Head>{documentTitle}</Head>
   )
 }
 

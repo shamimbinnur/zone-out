@@ -6,14 +6,14 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-const metaDescription = "A sleek and user-friendly Pomodoro Timer designed to enhance focus and productivity by helping you efficiently manage work intervals and breaks. Stay on track with your tasks using this intuitive tool tailored for optimal time management."
+const metaDescription = "A sleek and user-friendly Online Pomodoro Timer designed to enhance focus and productivity by helping you efficiently manage work intervals and breaks. Stay on track with your tasks using this intuitive online pomodoro timer tailored for optimal time management."
 
 export const metadata: Metadata = {
-  title: "Pomodoro",
+  title: "Pomodoro Timer Online",
   description: metaDescription,
   metadataBase: new URL("https://zoneout.me"),
   alternates: {
-    canonical: "/",
+    canonical: "/tool/pomo",
     languages: {
       "en-US": "/en-US",
     }
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IE',
     url: 'https://zoneout.me',
-    title: 'Pomodoro',
+    title: 'Pomodoro Timer Online',
     siteName: 'Zone Out',
     description: metaDescription,
     images: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 
   // Twitter
   twitter: {
-    title: 'Pomodoro',
+    title: 'Pomodoro Timer Online',
     site: '@zoneout.me',
     card: 'summary_large_image',
     description: metaDescription,
