@@ -4,7 +4,7 @@ import useTimer from '@/hooks/useTimer'
 import { useSpring } from '@react-spring/web'
 import { useEffect, useState } from 'react'
 import { GrPowerReset } from 'react-icons/gr'
-import { IoMdAdd } from 'react-icons/io'
+import { IoMdAdd, IoMdRemove } from 'react-icons/io'
 import { animated } from '@react-spring/web'
 import ActionBtnGroup from './ActionBtnGroup'
 import DocTitle from '../common/DocTitle'
@@ -20,7 +20,8 @@ const Timer = () => {
     startLongBreak,
     toggleTimer,
     resetTimer,
-    increaseMinutes
+    increaseMinutes,
+    decreaseMinutes
   } = useTimer()
 
   const [isResetBtnVisible, setIsResetBtnVisible] = useState(false)
@@ -86,7 +87,7 @@ const Timer = () => {
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}`} />
-      <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-36 gap-y-16 sm:pt-72 items-center">
+      <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-36 gap-y-20 sm:pt-72 items-center">
         <animated.div
         style={timePillContainer}
         className="flex gap-x-3">
@@ -99,23 +100,35 @@ const Timer = () => {
           ))} 
         </animated.div>
 
-        <div className="max-w-[660px] px-10 py-6 flex justify-center ring-1 ring-slate-50 ring-opacity-40 rounded-3xl sm:rounded-[52px] relative">
+        <div className="max-w-[660px] px-10 py-8 flex justify-center ring-1 ring-slate-50 ring-opacity-40 rounded-3xl sm:rounded-[52px] relative">
           <div className="h-full w-full rounded-3xl sm:rounded-[52px] absolute top-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[rgba(83, 140, 103, 0.28)] border-out-green-200 to-[rgba(76, 160, 105, 0.26)] opacity-30 drop-shadow-md"></div>
           <div className="flex flex-col relative items-center ">
-            <section className="w-full absolute flex justify-between">
-              <animated.div
-              style={resetBtnAnimationProps}
-              onClick={increaseMinutes}
-              className="bg-out-green-200 ring-slate-50 ring-1 ring-opacity-30 hover:rotate-90 group bg-opacity-30 p-1 cursor-pointer sm:text-xl border-out-green-200 hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-full flex items-center justify-center">
-                <IoMdAdd className="rotate-90 group-hover:rotate-0 ease-out transition duration-500"/>
-              </animated.div>
+            <section className="w-full absolute justify-between flex gap-2">
+              <div className="flex gap-1">
+                <animated.div
+                style={resetBtnAnimationProps}
+                onClick={increaseMinutes}
+                className="bg-out-green-200 hover:rotate-90 group bg-opacity-50 h-5 w-6 cursor-pointer sm:text-lg border-out-green-200 hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-l-lg flex items-center justify-center">
+                  <IoMdAdd className="rotate-90 group-hover:rotate-0 ease-out transition duration-500"/>
+                </animated.div>
 
-              <animated.div
-              style={resetBtnAnimationProps}
-              onClick={resetTimer}
-              className="bg-out-green-200 ring-slate-50 ring-1 ring-opacity-30 bg-opacity-30 p-1 group cursor-pointer sm:text-xl sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 hover:bg-opacity-50 rounded-full flex items-center justify-center">
-                <GrPowerReset className="-rotate-180 group-hover:rotate-0 ease-out transition duration-500"/>
-              </animated.div>
+                <animated.div
+                style={resetBtnAnimationProps}
+                onClick={decreaseMinutes}
+                className="bg-out-green-200 hover:rotate-90 group bg-opacity-50 h-5 w-6 cursor-pointer sm:text-lg border-out-green-200 hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-r-lg flex items-center justify-center">
+                  <IoMdRemove className=" group-hover:rotate-0 ease-out transition duration-500"/>
+                </animated.div>
+              </div>
+
+              <div>
+                <animated.div
+                style={resetBtnAnimationProps}
+                onClick={resetTimer}
+                className="bg-out-green-200 bg-opacity-50 h-5 w-8 group cursor-pointer sm:text-sm sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 hover:bg-opacity-50 rounded-lg flex items-center justify-center">
+                  <GrPowerReset className="-rotate-180 group-hover:rotate-0 ease-out transition duration-500"/>
+                </animated.div>
+              </div>
+
             </section>
             
             <animated.div

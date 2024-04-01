@@ -67,7 +67,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
           className="select-none mx-auto text-base font-bold text-out-green-400 flex items-center justify-center gap-x-14"
           >
           
-          {!isActive && 
+          {!isActive &&
           <button className="text-nowrap" onClick={startLongBreak} >
             Long Break
           </button>}
