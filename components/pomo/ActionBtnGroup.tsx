@@ -52,7 +52,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   }
 
   return (
-    <div className="flex justify-center items-center gap-x-8">
+    <section className="flex justify-center items-center gap-x-8">
       <animated.button
       style={swipeButtonProps}
       onClick={handleLeftButtonClick}
@@ -91,7 +91,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       className="rounded-full flex items-center justify-center bg-out-green-400 transition-all">
         <MdArrowRight className="text-out-green-200 text-3xl scale-125"/>
       </animated.button>
-    </div>
+    </section>
   )
 }
 

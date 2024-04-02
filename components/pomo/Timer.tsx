@@ -3,11 +3,10 @@
 import useTimer from '@/hooks/useTimer'
 import { useSpring } from '@react-spring/web'
 import { useEffect, useState } from 'react'
-import { GrPowerReset } from 'react-icons/gr'
-import { IoMdAdd, IoMdRemove } from 'react-icons/io'
 import { animated } from '@react-spring/web'
 import ActionBtnGroup from './ActionBtnGroup'
 import DocTitle from '../common/DocTitle'
+import UtilityBtn from './UtilityBtn'
 
 const Timer = () => {
   const {
@@ -41,9 +40,7 @@ const Timer = () => {
       duration: 100,
       transition: 'ease-in-out'
     },
-    from: {
-      transform: 'translateY(0)',
-    }
+    from: { transform: 'translateY(0)' }
   })
 
   const timePillContainer = useSpring({
@@ -52,9 +49,7 @@ const Timer = () => {
       duration: 100,
       transition: 'ease-in-out'
     },
-    from: {
-      opacity: 0
-    }
+    from: { opacity: 0 }
   })
 
   const handleButtonText = () => {  
@@ -89,8 +84,8 @@ const Timer = () => {
       <DocTitle documentTitle={`${min} : ${secs}`} />
       <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-36 gap-y-20 sm:pt-72 items-center">
         <animated.div
-        style={timePillContainer}
-        className="flex gap-x-3">
+          style={timePillContainer}
+          className="flex gap-x-3">
           {stAr.map((item, index) => (
             <div key={item} className={
               `py-1 w-8 flex justify-center select-none items-center pointer-events-none text-out-green-600 font-bold rounded-full bg-white opacity-10 ${index + 1 <= counter ? "opacity-70 text-out-green-1000" : ""}`
@@ -103,36 +98,16 @@ const Timer = () => {
         <div className="max-w-[660px] px-10 py-8 flex justify-center ring-1 ring-slate-50 ring-opacity-40 rounded-3xl sm:rounded-[52px] relative">
           <div className="h-full w-full rounded-3xl sm:rounded-[52px] absolute top-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[rgba(83, 140, 103, 0.28)] border-out-green-200 to-[rgba(76, 160, 105, 0.26)] opacity-30 drop-shadow-md"></div>
           <div className="flex flex-col relative items-center ">
-            <section className="w-full absolute justify-between flex gap-2">
-              <div className="flex gap-1">
-                <animated.div
-                style={resetBtnAnimationProps}
-                onClick={increaseMinutes}
-                className="bg-out-green-200 sm:hover:rotate-90 group bg-opacity-50 h-5 w-6 cursor-pointer sm:text-lg border-out-green-200 sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-l-lg flex items-center justify-center">
-                  <IoMdAdd className="rotate-90 sm:group-hover:rotate-0 ease-out transition duration-500"/>
-                </animated.div>
-
-                <animated.div
-                style={resetBtnAnimationProps}
-                onClick={decreaseMinutes}
-                className="bg-out-green-200 sm:hover:rotate-90 group bg-opacity-50 h-5 w-6 cursor-pointer sm:text-lg border-out-green-200 sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-r-lg flex items-center justify-center">
-                  <IoMdRemove className="ease-out transition duration-500"/>
-                </animated.div>
-              </div>
-
-              <div>
-                <animated.div
-                style={resetBtnAnimationProps}
-                onClick={resetTimer}
-                className="bg-out-green-200 bg-opacity-50 h-5 w-8 group cursor-pointer sm:text-sm sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-lg flex items-center justify-center">
-                  <GrPowerReset className="-rotate-180 sm:group-hover:rotate-0 ease-out transition duration-500"/>
-                </animated.div>
-              </div>
-            </section>
+            <UtilityBtn
+              resetBtnAnimationProps={resetBtnAnimationProps}
+              increaseMinutes={increaseMinutes}
+              decreaseMinutes={decreaseMinutes}
+              resetTimer={resetTimer}
+            />
             
             <animated.div
-            style={timerContainerAnimationProps}
-            className="flex gap-8 transition-all my-6 sm:my-4 leading-none select-none overflow-hidden justify-start items-center cursor-default">
+              style={timerContainerAnimationProps}
+              className="flex gap-8 transition-all my-6 sm:my-4 leading-none select-none overflow-hidden justify-start items-center cursor-default">
               <div>
                 <p className="sm:text-[182px] sm:w-56 text-[90px] font-semibold sm:font-medium text-white">{min < 10 ? `0${min}` : min}</p>
               </div>
