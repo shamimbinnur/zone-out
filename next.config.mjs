@@ -3,7 +3,7 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/t',
+        source: '/p',
         destination: '/tool/pomo',
         permanent: true,
       },
