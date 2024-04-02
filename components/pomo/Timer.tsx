@@ -16,6 +16,7 @@ const Timer = () => {
     isActive,
     counter,
     isPromoComplete,
+    resetState,
     startShortBreak,
     startLongBreak,
     toggleTimer,
@@ -101,11 +102,21 @@ const Timer = () => {
           <div className="flex flex-col relative items-center ">
             <UtilityBtn
               resetBtnAnimationProps={resetBtnAnimationProps}
-              increaseMinutes={increaseMinutes}
+              increaseMinutes={()=>{
+                if (!resetState) {
+                  showToast("Oops! You've already started the timer.", "Please reset the timer first in order to increase the timer limit")
+                  return
+                }
+                increaseMinutes()
+              }}
               decreaseMinutes={()=>{
+                 if (!resetState) {
+                  showToast("Oops! You've already started the timer.", "Please reset the timer first in order to decrease the timer limit.")
+                  return false
+                }
                 const res = decreaseMinutes()
                 if (res === false) {
-                  showToast("Oops! It seems you've reached the minimum time limit.", "To keep in line with Pomodoro rules, we can't set the timer for less than 25 minutes. Keep up the great work!")
+                  showToast("Oops! You've reached the minimum time limit.", "To keep in line with Pomodoro rules, we can't set the timer for less than 25 minutes. Keep up the great work!")
                 }
                 return res
               }}
@@ -129,7 +140,7 @@ const Timer = () => {
           </div>
         </div>
 
-        <ActionBtnGroup 
+        <ActionBtnGroup
           startShortBreak={startShortBreak}
           startLongBreak={startLongBreak}
           toggleTimer={toggleTimer}
