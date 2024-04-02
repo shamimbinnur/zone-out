@@ -2,11 +2,11 @@
 const nextConfig = {
   async redirects() {
     return [
-      // {
-      //   source: '/',
-      //   destination: '/tool/pomo',
-      //   permanent: false,
-      // },
+      {
+        source: '/t',
+        destination: '/tool/pomo',
+        permanent: true,
+      },
     ];
   }
 };

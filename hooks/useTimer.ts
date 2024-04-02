@@ -11,7 +11,7 @@ type timerType = {
   startShortBreak: () => void,
   startLongBreak: () => void,
   increaseMinutes: () => void,
-  decreaseMinutes: () => void,
+  decreaseMinutes: () => boolean,
   toggleTimer: () => void,
   resetTimer: () => void
 }
@@ -74,8 +74,9 @@ const useTimer = (): timerType => {
   }
 
   const decreaseMinutes = () => {
-    if (minutes == 25) return
+    if (minutes == 25) return false
     setMinutes(minutes - 5)
+    return true
   }
 
   const startShortBreak = () => {

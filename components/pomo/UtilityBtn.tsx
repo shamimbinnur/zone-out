@@ -6,7 +6,7 @@ import { GrPowerReset } from 'react-icons/gr'
 interface UtilityBtnProps {
   resetBtnAnimationProps: any
   increaseMinutes: () => void
-  decreaseMinutes: () => void
+  decreaseMinutes: () => boolean
   resetTimer: () => void
 }
 
@@ -14,7 +14,7 @@ const UtilityBtn:FC<UtilityBtnProps> = ({
   resetBtnAnimationProps,
   increaseMinutes,
   decreaseMinutes,
-  resetTimer
+  resetTimer,
 }) => {
   return (
     <section className="w-full absolute justify-between flex gap-2">

@@ -7,6 +7,7 @@ import { animated } from '@react-spring/web'
 import ActionBtnGroup from './ActionBtnGroup'
 import DocTitle from '../common/DocTitle'
 import UtilityBtn from './UtilityBtn'
+import useToasts from '../common/useToast'
 
 const Timer = () => {
   const {
@@ -24,6 +25,7 @@ const Timer = () => {
   } = useTimer()
 
   const [isResetBtnVisible, setIsResetBtnVisible] = useState(false)
+  const { showToast, ToastComponent } = useToasts()
 
   const resetBtnAnimationProps = useSpring({
     opacity: isResetBtnVisible ? 1 : 0,
@@ -74,9 +76,8 @@ const Timer = () => {
 
   useEffect(() => {
     isActive ? document.title = `${min} : ${secs}` : document.title = "Pomodoro Timer"
-  },[isActive, min, secs])
+  },[isActive, min, secs])  
   
-
   const stAr=["25","50","75","100"]
 
   return (
@@ -101,7 +102,13 @@ const Timer = () => {
             <UtilityBtn
               resetBtnAnimationProps={resetBtnAnimationProps}
               increaseMinutes={increaseMinutes}
-              decreaseMinutes={decreaseMinutes}
+              decreaseMinutes={()=>{
+                const res = decreaseMinutes()
+                if (res === false) {
+                  showToast("Oops! It seems you've reached the minimum time limit.", "To keep in line with Pomodoro rules, we can't set the timer for less than 25 minutes. Keep up the great work!")
+                }
+                return res
+              }}
               resetTimer={resetTimer}
             />
             
@@ -130,6 +137,7 @@ const Timer = () => {
           isActive={isActive}
         />
       </section>
+      {ToastComponent}
     </>
   )
 }
