@@ -74,7 +74,7 @@ const useTimer = (): timerType => {
   }
 
   const decreaseMinutes = () => {
-    if (minutes == 25) return false
+    if (minutes <= 25) return false
     setMinutes(minutes - 5)
     return true
   }
