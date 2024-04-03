@@ -19,16 +19,9 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
 }) => {
 
   const [buttonPosition, setButtonPosition] = useState(0)
-  const [props, api] =  useSpring(() => ({
-    x: 0,
-    config: {
-      mass: 5,
-      friction: 120,
-      tension: 120,
-    },
-  }), [])
+  const [props, api] =  useSpring(() => ({ x: 0 }), [])
 
-  useEffect(() => {api.start({ x: 0, config: { tension: 180, friction: 18 } }) }, [isActive])
+  useEffect(() => {api.start({ x: 0 }) }, [isActive])
 
   // Swipe button animation to show/hide
   const swipeButtonProps = useSpring({
@@ -46,7 +39,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
     // If button is on the right, let it go back to the middle
     else if (buttonPosition == -1) {
       api.start({ 
-        config: { tension: 180, friction: 10 },
+        config: { tension: 180, friction: 8 },
         from: { x: 136 },
         to: { x: 142 }
       })
@@ -70,7 +63,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
     else if (buttonPosition == 1) {
       // If button is on the right, let it go back to the middle
       api.start({ 
-        config: { tension: 180, friction: 10 },
+        config: { tension: 180, friction: 8 },
         from: { x: -142 },
         to: { x: -136 }
       })
