@@ -18,11 +18,19 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   handleButtonText
 }) => {
 
-  const [isButtonInMiddle, setIsButtonInMiddle] = useState(true)
-  const [props, api] =  useSpring(() => ({ from: { x: 0 } }))
+  const [buttonPosition, setButtonPosition] = useState(0)
+  const [props, api] =  useSpring(() => ({
+    x: 0,
+    config: {
+      mass: 5,
+      friction: 120,
+      tension: 120,
+    },
+  }), [])
 
-  useEffect(() => {api.start({ x: 0 }) }, [isActive])
+  useEffect(() => {api.start({ x: 0, config: { tension: 180, friction: 18 } }) }, [isActive])
 
+  // Swipe button animation to show/hide
   const swipeButtonProps = useSpring({
     config: { duration: 100 },
     from: { opacity: 0 },
@@ -30,24 +38,50 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   })
 
   const handleLeftButtonClick = () => {
-    if (isButtonInMiddle){
-      api.start({ x: -135 })
-      setIsButtonInMiddle(!isButtonInMiddle)
+    // If button is in the middle, move it to the left
+    if (buttonPosition == 0) {
+      api.start({ x: 142 })
+      setButtonPosition(-1)
     }
-    else {
-      api.start({ x: 0 })
-      setIsButtonInMiddle(!isButtonInMiddle)
+    // If button is on the right, let it go back to the middle
+    else if (buttonPosition == -1) {
+      api.start({ 
+        config: { tension: 180, friction: 10 },
+        from: { x: 136 },
+        to: { x: 142 }
+      })
+    }
+    // If button is on the left, let it go back to the middle
+    else if (buttonPosition == 1) {
+      api.start({
+        x: 0,
+        config: { tension: 170, friction: 26 }
+      })
+      setButtonPosition(0)
     }
   }
 
   const handleRightButtonClick = () => {
-    if (isButtonInMiddle) {
-    api.start({ x: 142 })
-    setIsButtonInMiddle(!isButtonInMiddle)
+    // If button is in the middle, move it to the right
+    if (buttonPosition == 0) {
+      api.start({ x: -135 })
+      setButtonPosition(1)
     }
-    else {
-      api.start({ x: 0 })
-      setIsButtonInMiddle(!isButtonInMiddle)
+    else if (buttonPosition == 1) {
+      // If button is on the right, let it go back to the middle
+      api.start({ 
+        config: { tension: 180, friction: 10 },
+        from: { x: -142 },
+        to: { x: -136 }
+      })
+    }
+    else if (buttonPosition == -1) {
+      // If button is on the left, let it go back to the middle
+      api.start({
+        x: 0,
+        config: { tension: 170, friction: 26 }
+      })
+      setButtonPosition(0)
     }
   }
 
