@@ -1,27 +1,29 @@
 import React, { FC, useEffect, useState } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 import { MdArrowLeft, MdArrowRight } from 'react-icons/md';
+import { FaPause } from 'react-icons/fa';
 
 interface ActionBtnGroupProps {
-  startShortBreak: () => void
-  startLongBreak: () => void
+  toggleShortBreak: () => void
+  toggleLongBreak: () => void
   toggleTimer: () => void
   isActive: boolean
   handleButtonText: () => string
+  pauseTimer: () => void
 }
 
 const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
-  startShortBreak,
-  startLongBreak,
+  toggleShortBreak,
+  toggleLongBreak,
   toggleTimer,
   isActive,
-  handleButtonText
+  pauseTimer,
 }) => {
 
   const [buttonPosition, setButtonPosition] = useState(0)
-  const [props, api] =  useSpring(() => ({ x: 0 }), [])
+  const [pillProps, api] =  useSpring(() => ({ x: 0, scale: 1 }), [])
 
-  useEffect(() => {api.start({ x: 0 }) }, [isActive])
+  // useEffect(() => {api.start({ x: 0 }) }, [])
 
   // Swipe button animation to show/hide
   const swipeButtonProps = useSpring({
@@ -29,6 +31,36 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
     from: { opacity: 0 },
     to: { opacity: isActive ? 0 : 1 }
   })
+
+  const [pillContainer, pillContainerApi] = useSpring(() => ({}))
+  const [pauseBtnProps, pauseBtnPropsApi] = useSpring(() => ({}))
+
+  useEffect(() => {
+    pillContainerApi.start({
+      config:{
+        duration: 100,
+      },
+      to: {
+        scaleX: isActive ? 0.2 : 1,
+        scaleY: isActive ? 0.8 : 1,
+        opacity: isActive ? 0 : 1
+      }
+    })
+  }, [isActive])
+
+  useEffect(() => {
+    pauseBtnPropsApi.start({
+      config:{
+        duration: 100,
+      },
+      to: {
+        scaleX: isActive ? 1 : 1.5,
+        scaleY: isActive ? 1 : 0.9,
+        opacity: isActive ? 1 : 0
+      }
+    })
+  }, [isActive])
+  
 
   const handleLeftButtonClick = () => {
     // If button is in the middle, move it to the left
@@ -77,9 +109,9 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       setButtonPosition(0)
     }
   }
-
+  
   return (
-    <section className="flex justify-center items-center gap-x-8">
+    <section className="flex relative justify-center items-center gap-x-8">
       <animated.button
       style={swipeButtonProps}
       onClick={handleLeftButtonClick}
@@ -88,36 +120,41 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
         <MdArrowLeft className="text-out-green-200 text-3xl scale-125"/>
       </animated.button>
 
-      <div  className="w-[160px] py-1 mx-auto bg-out-green-1000 rounded-[52px] overflow-x-hidden">
+      <animated.div style={pillContainer} className="w-[160px] py-1 mx-auto bg-out-green-1000 rounded-[52px] overflow-x-hidden">
         <animated.div
-          style={props}
+          style={pillProps}
           className="select-none mx-auto text-base font-bold text-out-green-400 flex items-center justify-center gap-x-14"
           >
-          
-          {!isActive &&
-          <button className="text-nowrap" onClick={startLongBreak} >
-            Long Break
-          </button>}
+            <button className="text-nowrap" onClick={toggleLongBreak} >
+              Long Break
+            </button>
 
-          <button onClick={toggleTimer} className="text-3xl">
-            {handleButtonText()}
-            {isActive && <span className="animate-pulse text-red-500"> .</span>}
-          </button>
+            <animated.button onClick={toggleTimer} className="text-3xl">
+              Start
+            </animated.button>
 
-          {!isActive &&
-          <button className="text-nowrap" onClick={startShortBreak} >
-            Short Break
-          </button>}
+            <button className="text-nowrap" onClick={toggleShortBreak} >
+              Short Break
+            </button>
         </animated.div>
-      </div>
+      </animated.div>
 
       <animated.button
-      style={swipeButtonProps}
       onClick={handleRightButtonClick}
+      style={swipeButtonProps}
       disabled={isActive}
       className="rounded-full flex items-center justify-center bg-out-green-400 transition-all">
         <MdArrowRight className="text-out-green-200 text-3xl scale-125"/>
       </animated.button>
+
+      {/* Pause Button */}
+      {isActive &&
+      <animated.button
+      onClick={pauseTimer}
+      style={pauseBtnProps}
+      className="bg-out-green-1000 rounded-full absolute text-sm p-4 text-white">
+        <FaPause/>
+      </animated.button>}
     </section>
   )
 }

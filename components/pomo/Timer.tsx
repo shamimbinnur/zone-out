@@ -17,12 +17,13 @@ const Timer = () => {
     counter,
     isPromoComplete,
     resetState,
-    startShortBreak,
-    startLongBreak,
+    shortBreakToggle,
+    longBreakToggle,
     toggleTimer,
     resetTimer,
     increaseMinutes,
-    decreaseMinutes
+    decreaseMinutes,
+    pauseTimer
   } = useTimer()
 
   const [isResetBtnVisible, setIsResetBtnVisible] = useState(false)
@@ -141,11 +142,12 @@ const Timer = () => {
         </div>
 
         <ActionBtnGroup
-          startShortBreak={startShortBreak}
-          startLongBreak={startLongBreak}
+          toggleShortBreak={shortBreakToggle}
+          toggleLongBreak={longBreakToggle}
           toggleTimer={toggleTimer}
           handleButtonText={handleButtonText}
           isActive={isActive}
+          pauseTimer={pauseTimer}
         />
       </section>
       {ToastComponent}

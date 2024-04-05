@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react"
 
-type statusType = "POMO" | "SHORT" | "LONG"
-
 type timerType = {
   min: number,
   secs: number,
@@ -9,22 +7,32 @@ type timerType = {
   counter: number,
   isPromoComplete: boolean,
   resetState: boolean,
-  startShortBreak: () => void,
-  startLongBreak: () => void,
+  shortBreakToggle: () => void,
+  longBreakToggle: () => void,
   increaseMinutes: () => void,
   decreaseMinutes: () => boolean,
   toggleTimer: () => void,
-  resetTimer: () => void
+  resetTimer: () => void,
+  pauseTimer: () => void
 }
 
-const POMO_MIN = 25
+export enum Status {
+  POMO,
+  SHORT,
+  LONG
+}
+enum InitialMin {
+  POMO = 25,
+  SHORT = 5,
+  LONG = 15
+}
 
 const useTimer = (): timerType => {
-  const [minutes, setMinutes] = useState<number>(POMO_MIN)
+  const [minutes, setMinutes] = useState<number>(InitialMin.POMO)
   const [seconds, setSeconds] = useState<number>(0)
   const [isActive, setIsActive] = useState<boolean>(false)
   const [counter, setCounter] = useState<number>(0)
-  const [status, setStatus] = useState<statusType>("POMO")
+  const [status, setStatus] = useState<Status>(Status.POMO)
   const [isPromoComplete, setIsPromoComplete] = useState<boolean>(false)
   const [resetState, setResetState] = useState<boolean>(true)
 
@@ -35,7 +43,7 @@ const useTimer = (): timerType => {
       interval = setInterval(() => {
         if (seconds === 0) {
           if (minutes === 0) {
-            if (status == "POMO") {
+            if (status == Status.POMO) {
               setResetState(true)
               setCounter(counter + 1)
               setIsActive(false)
@@ -62,7 +70,12 @@ const useTimer = (): timerType => {
       setIsActive(false)
       resetTimer()
     }
-    setStatus("POMO");
+    // If the timer was set to BREAK previously, reset the time to initial min.
+    if (status != Status.POMO) {
+      setMinutes(InitialMin.POMO)
+      setSeconds(0)
+    }
+    setStatus(Status.POMO);
     setIsActive(!isActive)
   };
 
@@ -70,7 +83,7 @@ const useTimer = (): timerType => {
     setResetState(true)
     setIsPromoComplete(false)
     setIsActive(false)
-    setMinutes(POMO_MIN)
+    setMinutes(InitialMin.POMO)
     setSeconds(0)
   };
 
@@ -84,18 +97,46 @@ const useTimer = (): timerType => {
     return true
   }
 
-  const startShortBreak = () => {
-    setStatus("SHORT")
-    setMinutes(5)
-    setSeconds(0)
-    setIsActive(true)
+  const shortBreakToggle = () => {
+    if (status == Status.SHORT) {
+      setIsActive(!isActive)
+      return
+    }
+    setStatus(Status.SHORT)
+    resetTimeToShortBreak()
+    setIsActive(!isActive)
   }
 
-  const startLongBreak = () => {
-    setStatus("LONG")
-    setMinutes(15)
+  const longBreakToggle = () => {
+    if (status == Status.LONG) {
+      setIsActive(!isActive)
+      return
+    }
+    setStatus(Status.LONG)
+    resetTimeToLongBreak()
+    setIsActive(!isActive)
+  }
+
+  const resetTimeToShortBreak = () => {
+    setMinutes(InitialMin.SHORT)
     setSeconds(0)
-    setIsActive(true)
+  }
+  const resetTimeToLongBreak = () => {
+    setMinutes(InitialMin.LONG)
+    setSeconds(0)
+  }
+
+  const pauseTimer = () => {
+    console.log("call")
+    if (status == Status.POMO) {
+      toggleTimer()
+    }
+    else if (status == Status.SHORT) {
+      shortBreakToggle()
+    }
+    else if (status == Status.LONG) {
+      longBreakToggle()
+    }
   }
 
   return {
@@ -105,12 +146,13 @@ const useTimer = (): timerType => {
     counter,
     isPromoComplete,
     resetState,
-    startShortBreak,
-    startLongBreak,
+    shortBreakToggle,
+    longBreakToggle,
     increaseMinutes,
     decreaseMinutes,
     toggleTimer,
-    resetTimer
+    resetTimer,
+    pauseTimer,
   };
 }
 
