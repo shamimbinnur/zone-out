@@ -22,14 +22,14 @@ const UtilityBtn:FC<UtilityBtnProps> = ({
         <animated.div
         style={resetBtnAnimationProps}
         onClick={increaseMinutes}
-        className="bg-out-green-200 sm:hover:rotate-90 group bg-opacity-50 h-5 w-6 cursor-pointer sm:text-lg border-out-green-200 sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-l-lg flex items-center justify-center">
+        className="bg-out-green-200 sm:hover:rotate-90 group bg-opacity-50 h-5 w-6 cursor-pointer sm:text-lg sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-l-lg flex items-center justify-center">
           <IoMdAdd className="rotate-90 sm:group-hover:rotate-0 ease-out transition duration-500"/>
         </animated.div>
 
         <animated.div
         style={resetBtnAnimationProps}
         onClick={decreaseMinutes}
-        className="bg-out-green-200 sm:hover:rotate-90 group bg-opacity-50 h-5 w-6 cursor-pointer sm:text-lg border-out-green-200 sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-r-lg flex items-center justify-center">
+        className="bg-out-green-200 sm:hover:rotate-90 group bg-opacity-50 h-5 w-6 cursor-pointer sm:text-lg sm:hover:text-white transition-all duration-150 ease-in text-out-green-800 sm:hover:bg-opacity-50 rounded-r-lg flex items-center justify-center">
           <IoMdRemove className="ease-out transition duration-500"/>
         </animated.div>
       </div>
