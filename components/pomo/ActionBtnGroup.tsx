@@ -1,7 +1,9 @@
 import React, { FC, useEffect, useState } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 import { MdArrowLeft, MdArrowRight } from 'react-icons/md';
-import { FaPause } from 'react-icons/fa';
+import { FaPause, FaWalking } from 'react-icons/fa';
+import { BsStars } from 'react-icons/bs';
+import { CiCoffeeCup } from 'react-icons/ci';
 
 interface ActionBtnGroupProps {
   toggleShortBreak: () => void
@@ -65,15 +67,15 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   const handleLeftButtonClick = () => {
     // If button is in the middle, move it to the left
     if (buttonPosition == 0) {
-      api.start({ x: 142 })
+      api.start({ x: 155 })
       setButtonPosition(-1)
     }
-    // If button is on the right, let it go back to the middle
+    // If button is on the right, shake the button.
     else if (buttonPosition == -1) {
       api.start({ 
         config: { tension: 180, friction: 8 },
-        from: { x: 136 },
-        to: { x: 142 }
+        from: { x: 150 },
+        to: { x: 155 }
       })
     }
     // If button is on the left, let it go back to the middle
@@ -89,15 +91,15 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   const handleRightButtonClick = () => {
     // If button is in the middle, move it to the right
     if (buttonPosition == 0) {
-      api.start({ x: -135 })
+      api.start({ x: -155 })
       setButtonPosition(1)
     }
     else if (buttonPosition == 1) {
-      // If button is on the right, let it go back to the middle
+      // If button is on the right, shake the button.
       api.start({ 
         config: { tension: 180, friction: 8 },
-        from: { x: -142 },
-        to: { x: -136 }
+        from: { x: -150 },
+        to: { x: -155 }
       })
     }
     else if (buttonPosition == -1) {
@@ -116,25 +118,28 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       style={swipeButtonProps}
       onClick={handleLeftButtonClick}
       disabled={isActive}
-      className="rounded-full bg-out-green-400 transition-all">
-        <MdArrowLeft className="text-out-green-200 text-3xl scale-125"/>
+      className="rounded-full border translate-y-[1px] border-out-green-1000 border-opacity-55 bg-out-green-800 transition-all">
+        <MdArrowLeft className="text-out-green-1000 text-3xl scale-125"/>
       </animated.button>
 
-      <animated.div style={pillContainer} className="w-[160px] py-1 mx-auto bg-out-green-1000 rounded-[52px] overflow-x-hidden">
+      <animated.div style={pillContainer} className="w-[160px] py-1 border border-out-green-200 mx-auto bg-out-green-1000 rounded-[52px] overflow-x-hidden">
         <animated.div
           style={pillProps}
           className="select-none mx-auto text-base font-bold text-out-green-400 flex items-center justify-center gap-x-14"
           >
-            <button className="text-nowrap" onClick={toggleLongBreak} >
-              Long Break
+            <button className="text-nowrap flex items-center gap-1" onClick={toggleLongBreak} >
+              <FaWalking className="text-lg" />
+              Long break
             </button>
 
-            <animated.button onClick={toggleTimer} className="text-3xl">
+            <animated.button onClick={toggleTimer} className="text-2xl flex items-center justify-center gap-2">
+              <BsStars className="text-xl" />
               Start
             </animated.button>
 
-            <button className="text-nowrap" onClick={toggleShortBreak} >
-              Short Break
+            <button className="text-nowrap flex items-center gap-1" onClick={toggleShortBreak} >
+              <CiCoffeeCup className="text-lg" />
+              Short break
             </button>
         </animated.div>
       </animated.div>
@@ -143,8 +148,8 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       onClick={handleRightButtonClick}
       style={swipeButtonProps}
       disabled={isActive}
-      className="rounded-full flex items-center justify-center bg-out-green-400 transition-all">
-        <MdArrowRight className="text-out-green-200 text-3xl scale-125"/>
+      className="rounded-full border translate-y-[1px] border-opacity-55 border-out-green-1000 flex items-center justify-center bg-out-green-800 transition-all">
+        <MdArrowRight className="text-out-green-1000 text-3xl scale-125"/>
       </animated.button>
 
       {/* Pause Button */}
@@ -152,7 +157,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       <animated.button
       onClick={pauseTimer}
       style={pauseBtnProps}
-      className="bg-out-green-1000 rounded-full absolute text-sm p-4 text-white">
+      className="bg-out-green-1000 border border-out-green-200 rounded-full absolute text-sm p-4 text-white">
         <FaPause/>
       </animated.button>}
     </section>
