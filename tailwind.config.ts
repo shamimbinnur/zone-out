@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        '_410': '410px',
+      },
       colors: {
         "out-green-1000": "#0E3A0F",
         "out-green-800": "#41A563",

@@ -17,7 +17,7 @@ const MDXsection:FC<MDXsectionProps> = ({
       prose-headings:text-gray-800
       prose-h1:text-5xl prose-h1:font-semibold prose-h1:tracking-tighter prose-h1:leading-tight prose-h1:mb-16
       prose-h2:text-4xl prose-h2:font-semibold prose-h2:tracking-tighter prose-h2:leading-tight
-      prose-p:text-xl prose-p:font-normal prose-p:tracking-tighter prose-p:leading-normal prose-p:my-8
+      prose-p:text-xl prose-p:font-normal prose-p:tracking-tight prose-p:leading-normal prose-p:my-8
       prose-ol:text-xl prose-ol:font-normal prose-ol:tracking-tighter prose-ol:leading-normal prose-ol:my-8
       prose-li:text-xl prose-li:font-normal prose-li:tracking-tighter prose-li:leading-normal prose-li:my-8
       ">
