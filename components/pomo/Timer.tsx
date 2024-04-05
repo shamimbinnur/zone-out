@@ -84,7 +84,7 @@ const Timer = () => {
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}`} />
-      <section className="h-[calc(100vh)] sm:h-[calc(100vh)] px-8 flex flex-col pt-36 gap-y-20 sm:pt-72 items-center">
+      <section className="min-h-screen px-8 flex flex-col justify-center gap-y-20 items-center">
         <animated.div
           style={timePillContainer}
           className="flex gap-x-3">
