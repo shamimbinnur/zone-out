@@ -8,6 +8,7 @@ import ActionBtnGroup from './ActionBtnGroup'
 import DocTitle from '../common/DocTitle'
 import UtilityBtn from './UtilityBtn'
 import useToasts from '../common/useToast'
+import Progressbar from './Progressbar'
 
 const Timer = () => {
   const {
@@ -26,12 +27,12 @@ const Timer = () => {
     pauseTimer
   } = useTimer()
 
-  const [isResetBtnVisible, setIsResetBtnVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const { showToast, ToastComponent } = useToasts()
 
-  const resetBtnAnimationProps = useSpring({
-    opacity: isResetBtnVisible ? 1 : 0,
-    transform: isResetBtnVisible ? 'translateY(0)' : 'translateY(-40%)',
+  const commonButtonProps = useSpring({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateY(0)' : 'translateY(-40%)',
     config: { 
       duration: 100,
       transition: 'ease-in'
@@ -70,9 +71,9 @@ const Timer = () => {
 
   useEffect(() => {
     if (isActive) {
-      setIsResetBtnVisible(false)
+      setIsVisible(false)
     } else {
-      setIsResetBtnVisible(true)
+      setIsVisible(true)
     }
   }, [isActive])
 
@@ -80,29 +81,19 @@ const Timer = () => {
     isActive ? document.title = `${min} : ${secs}` : document.title = "Pomodoro Timer"
   },[isActive, min, secs])  
   
-  const stAr=["25","50","75","100"]
-
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}`} />
       <section className="min-h-screen px-8 flex flex-col justify-center gap-y-20 items-center">
-        <animated.div
-          style={timePillContainer}
-          className="flex gap-x-3">
-          {stAr.map((item, index) => (
-            <div key={item} className={
-              `py-1 w-8 flex justify-center select-none items-center pointer-events-none text-out-green-600 font-bold rounded-full bg-white opacity-10 ${index + 1 <= counter ? "opacity-70 text-out-green-1000" : ""}`
-            }>
-              <p className="text-xs">{item}</p>
-            </div>
-          ))} 
+        <animated.div style={commonButtonProps}>
+          <Progressbar completed={counter} />
         </animated.div>
 
         <div className="max-w-[660px] scale-95 _410:scale-100 px-10 py-8 flex justify-center ring-1 ring-out-green-200 rounded-3xl sm:rounded-[52px] relative">
           <div className="h-full w-full rounded-3xl sm:rounded-[52px] absolute top-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[rgba(83, 140, 103, 0.28)] border-out-green-200 to-[rgba(76, 160, 105, 0.26)] opacity-30 drop-shadow-md"></div>
           <div className="flex flex-col relative items-center ">
             <UtilityBtn
-              resetBtnAnimationProps={resetBtnAnimationProps}
+              resetBtnAnimationProps={commonButtonProps}
               increaseMinutes={()=>{
                 if (!resetState) {
                   showToast("Oops! You've already started the timer.", "Please reset the timer first in order to increase the timer limit")
