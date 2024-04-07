@@ -6,7 +6,7 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-const metaDescription = "A sleek and user-friendly Online Pomodoro Timer designed to enhance focus and productivity by helping you efficiently manage work intervals and breaks. Stay on track with your tasks using this intuitive online pomodoro timer tailored for optimal time management."
+const metaDescription = "Elevate your productivity with our Pomodoro Timer Online. Our timer is meticulously crafted with a distraction-minimizing interface and a soothing green theme, promoting better eye and mental health. Say goodbye to distractions and boost efficiency for optimal task management, standing out amidst a crowded sea of online Pomodoro timers."
 
 export const metadata: Metadata = {
   title: "Pomodoro Timer Online",

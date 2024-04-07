@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ["latin"] });
 
-const metaDescription = "Zone Out: Your ultimate productivity solution. Uniting a suite of powerful tools, Zone Out empowers you to focus deeply on your tasks, preventing burnout and maximizing efficiency."
+const metaDescription = "Elevate your productivity with our comprehensive suite of tools. Designed to foster deep focus and prevent burnout, Zone Out maximizes efficiency for optimal task management"
 export const metadata: Metadata = {
   title: "Zone Out",
   description: metaDescription,
