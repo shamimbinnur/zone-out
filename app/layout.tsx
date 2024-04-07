@@ -10,6 +10,16 @@ export const metadata: Metadata = {
   title: "Zone Out",
   description: metaDescription,
   metadataBase: new URL("https://zoneout.me"),
+  icons: [
+    {
+      rel: "icon",
+      url: "/favicon.ico",
+    },
+    { 
+      rel: "apple-touch-icon",
+      url: "/favicon.ico",
+    }
+  ],
   alternates: {
     canonical: "/",
     languages: {

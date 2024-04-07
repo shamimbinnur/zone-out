@@ -12,6 +12,16 @@ export const metadata: Metadata = {
   title: "Pomodoro Timer Online",
   description: metaDescription,
   metadataBase: new URL("https://zoneout.me"),
+  icons: [
+    {
+      rel: "icon",
+      url: "/tomato.ico",
+    },
+    { 
+      rel: "apple-touch-icon",
+      url: "/tomato.ico",
+    }
+  ],
   alternates: {
     canonical: "/tool/pomo",
     languages: {
