@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 type timerType = {
   min: number,
@@ -10,7 +11,7 @@ type timerType = {
   shortBreakToggle: () => void,
   longBreakToggle: () => void,
   increaseMinutes: () => void,
-  decreaseMinutes: () => boolean,
+  decreaseMinutes: () => void,
   toggleTimer: () => void,
   resetTimer: () => void,
   pauseTimer: () => void
@@ -88,13 +89,37 @@ const useTimer = (): timerType => {
   };
 
   const increaseMinutes = () => {
+    if (!resetState) {
+      toast('⚠️ Reset the timer first!', {
+        description: 'You can\'t change the time while the timer is running.'
+      })
+      return
+    }
+    if (minutes >= 90) {
+      toast("⚠️ Maximum Limit Exceeded!", {
+        description: "You can't set more than 90 minutes.",
+      })
+      return
+    }
+
     setMinutes(minutes + 5)
   }
 
   const decreaseMinutes = () => {
-    if (minutes <= 25) return false
+    if (!resetState) {
+      toast('⚠️ Reset the timer first!', {
+        description: 'You can\'t change the time while the timer is running.'
+      })
+      return
+    }
+    if (minutes <= 25) {
+      toast("⚠️ Minimum Limit Reached!", {
+        description: "You can't set less than 25 minutes.",
+      })
+      return
+    }
+
     setMinutes(minutes - 5)
-    return true
   }
 
   const shortBreakToggle = () => {
