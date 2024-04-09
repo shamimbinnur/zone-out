@@ -7,7 +7,6 @@ import { animated } from '@react-spring/web'
 import ActionBtnGroup from './ActionBtnGroup'
 import DocTitle from '../common/DocTitle'
 import UtilityBtn from './UtilityBtn'
-import useToasts from '../common/useToast'
 import Progressbar from './Progressbar'
 
 const Timer = () => {
@@ -17,7 +16,6 @@ const Timer = () => {
     isActive,
     counter,
     isPromoComplete,
-    resetState,
     shortBreakToggle,
     longBreakToggle,
     toggleTimer,
@@ -28,7 +26,6 @@ const Timer = () => {
   } = useTimer()
 
   const [isVisible, setIsVisible] = useState(false)
-  const { showToast, ToastComponent } = useToasts()
 
   const commonButtonProps = useSpring({
     opacity: isVisible ? 1 : 0,
@@ -94,24 +91,8 @@ const Timer = () => {
           <div className="flex flex-col relative items-center ">
             <UtilityBtn
               resetBtnAnimationProps={commonButtonProps}
-              increaseMinutes={()=>{
-                if (!resetState) {
-                  showToast("Oops! You've already started the timer.", "Please reset the timer first in order to increase the timer limit")
-                  return
-                }
-                increaseMinutes()
-              }}
-              decreaseMinutes={()=>{
-                 if (!resetState) {
-                  showToast("Oops! You've already started the timer.", "Please reset the timer first in order to decrease the timer limit.")
-                  return false
-                }
-                const res = decreaseMinutes()
-                if (res === false) {
-                  showToast("Oops! You've reached the minimum time limit.", "To keep in line with Pomodoro rules, we can't set the timer for less than 25 minutes. Keep up the great work!")
-                }
-                return res
-              }}
+              increaseMinutes={increaseMinutes}
+              decreaseMinutes={decreaseMinutes}
               resetTimer={resetTimer}
             />
             
@@ -141,7 +122,6 @@ const Timer = () => {
           pauseTimer={pauseTimer}
         />
       </section>
-      {ToastComponent}
     </>
   )
 }

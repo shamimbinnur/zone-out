@@ -6,7 +6,7 @@ import { GrPowerReset } from 'react-icons/gr'
 interface UtilityBtnProps {
   resetBtnAnimationProps: any
   increaseMinutes: () => void
-  decreaseMinutes: () => boolean
+  decreaseMinutes: () => void
   resetTimer: () => void
 }
 
