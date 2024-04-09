@@ -1,5 +1,5 @@
 {
-  "name": "zone-out",
+  "name": "Zone Out",
   "version": "1.0.0",
   "private": true,
   "author": {
@@ -7,6 +7,7 @@
     "email": "me@shamimbinnur.me",
     "url": "https://shamimbinnur.me"
   },
+  "license": "MIT",
   "homepage": "https://zoneout.me",
   "scripts": {
     "dev": "next dev",
