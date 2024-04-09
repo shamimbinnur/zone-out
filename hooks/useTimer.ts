@@ -90,13 +90,13 @@ const useTimer = (): timerType => {
 
   const increaseMinutes = () => {
     if (!resetState) {
-      toast('⚠️ Reset the timer first!', {
+      toast('⚠ Reset the timer first!', {
         description: 'You can\'t change the time while the timer is running.'
       })
       return
     }
     if (minutes >= 90) {
-      toast("⚠️ Maximum Limit Exceeded!", {
+      toast("⚠ Maximum Limit Exceeded!", {
         description: "You can't set more than 90 minutes.",
       })
       return
@@ -107,13 +107,13 @@ const useTimer = (): timerType => {
 
   const decreaseMinutes = () => {
     if (!resetState) {
-      toast('⚠️ Reset the timer first!', {
+      toast('⚠ Reset the timer first!', {
         description: 'You can\'t change the time while the timer is running.'
       })
       return
     }
     if (minutes <= 25) {
-      toast("⚠️ Minimum Limit Reached!", {
+      toast("⚠ Minimum Limit Reached!", {
         description: "You can't set less than 25 minutes.",
       })
       return
@@ -152,7 +152,6 @@ const useTimer = (): timerType => {
   }
 
   const pauseTimer = () => {
-    console.log("call")
     if (status == Status.POMO) {
       toggleTimer()
     }

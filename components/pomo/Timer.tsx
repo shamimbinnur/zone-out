@@ -76,8 +76,8 @@ const Timer = () => {
 
   useEffect(() => {
     isActive ? document.title = `${min} : ${secs}` : document.title = "Pomodoro Timer"
-  },[isActive, min, secs])  
-  
+  },[isActive, min, secs])
+    
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}`} />
