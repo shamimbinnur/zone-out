@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description: metaDescription,
     images: [
       {
-        url: `${process.env.MY_DOMAIN}/images/og.png` || "",
+        url: `${process.env.MY_DOMAIN}/images/pomo-og.png` || "",
         width: 1200,
         height: 630,
         alt: 'Zone Out',
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     description: metaDescription,
     images: [
       {
-        url: `${process.env.MY_DOMAIN}/images/og.png` || "",
+        url: `${process.env.MY_DOMAIN}/images/pomo-og.png` || "",
         width: 1200,
         height: 630,
         alt: 'Zone Out',
