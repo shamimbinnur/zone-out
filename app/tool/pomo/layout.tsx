@@ -11,7 +11,7 @@ const metaDescription = "Elevate your productivity with our Pomodoro Timer Onlin
 export const metadata: Metadata = {
   title: "Pomodoro Timer Online",
   description: metaDescription,
-  metadataBase: new URL("https://zoneout.me"),
+  metadataBase: new URL("https://zoneout.me/tool/pomo"),
   icons: [
     {
       rel: "icon",
