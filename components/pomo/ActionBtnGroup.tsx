@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, use, useEffect, useState } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 import { MdArrowLeft, MdArrowRight } from 'react-icons/md';
 import { FaPause, FaWalking } from 'react-icons/fa';
@@ -12,6 +12,7 @@ interface ActionBtnGroupProps {
   isActive: boolean
   handleButtonText: () => string
   pauseTimer: () => void
+  count: number
 }
 
 const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
@@ -20,6 +21,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   toggleTimer,
   isActive,
   pauseTimer,
+  count
 }) => {
 
   const [buttonPosition, setButtonPosition] = useState(0)
@@ -111,6 +113,17 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       setButtonPosition(0)
     }
   }
+
+  useEffect(() => {
+    if (count > 0 && count < 4) {
+      // If a pomodoro is completed, bring the 'short break' button to the middle of action-button component to make it more accessible for the user.
+      handleRightButtonClick()
+    } else if (count === 4) {
+      // If 4 pomodoros are completed, bring the 'long break' button to the middle of action-button component to make it more accessible for the user.
+      handleLeftButtonClick()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count])
   
   return (
     <section className="flex relative justify-center items-center gap-x-8">

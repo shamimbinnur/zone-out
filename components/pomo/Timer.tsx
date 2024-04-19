@@ -143,6 +143,7 @@ const Timer = () => {
           handleButtonText={handleButtonText}
           isActive={isActive}
           pauseTimer={pauseTimer}
+          count={counter}
         />
       </section>
     </>
