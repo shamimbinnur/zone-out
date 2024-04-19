@@ -24,7 +24,7 @@ export enum Status {
   LONG
 }
 enum InitialMin {
-  POMO = 1,
+  POMO = 25,
   SHORT = 5,
   LONG = 15
 }
