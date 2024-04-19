@@ -98,7 +98,7 @@ const Timer = () => {
      
     window.addEventListener("beforeunload", unloadCallback);
     return () => window.removeEventListener("beforeunload", unloadCallback);
-  }, [isActive, counter, secs]);
+  }, [isActive, counter, secs, min]);
     
   return (
     <>
