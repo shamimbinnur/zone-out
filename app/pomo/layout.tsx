@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     }
   ],
   alternates: {
-    canonical: "/tool/pomo",
+    canonical: "/pomo",
     languages: {
       "en-US": "/en-US",
     }
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
    openGraph: {
     type: 'website',
     locale: 'en_IE',
-    url: 'https://zoneout.me/tool/pomo',
+    url: 'https://zoneout.me/pomo',
     title: 'Pomodoro Timer Online',
     siteName: 'Zone Out',
     description: metaDescription,
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   // Twitter
   twitter: {
     title: 'Pomodoro Timer Online',
-    site: 'https://zoneout.me/tool/pomo',
+    site: 'https://zoneout.me/pomo',
     card: 'summary_large_image',
     description: metaDescription,
     images: [
