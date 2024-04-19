@@ -1,3 +1,4 @@
+import { makeSound } from "@/utils/audio"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -23,7 +24,7 @@ export enum Status {
   LONG
 }
 enum InitialMin {
-  POMO = 25,
+  POMO = 1,
   SHORT = 5,
   LONG = 15
 }
@@ -53,7 +54,7 @@ const useTimer = (): timerType => {
             clearInterval(interval)
           } else {
             setMinutes(minutes - 1)
-            setSeconds(59);
+            setSeconds(59)
           }
         } else {
           setSeconds(seconds - 1)

@@ -8,6 +8,7 @@ import ActionBtnGroup from './ActionBtnGroup'
 import DocTitle from '../common/DocTitle'
 import UtilityBtn from './UtilityBtn'
 import Progressbar from './Progressbar'
+import { makeSound } from '@/utils/audio'
 
 const Timer = () => {
   const {
@@ -77,6 +78,12 @@ const Timer = () => {
   useEffect(() => {
     isActive ? document.title = `${min} : ${secs}` : document.title = "Pomodoro Timer"
   },[isActive, min, secs])
+
+  useEffect(() => {
+    if (min === 0 && secs === 0) {
+      makeSound("HEADS-UP")
+    }
+  }, [min, secs])
     
   return (
     <>
