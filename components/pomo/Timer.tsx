@@ -85,9 +85,10 @@ const Timer = () => {
     }
   }, [min, secs])
 
+  // Beforeunload event listener
   useEffect(() => {
     const unloadCallback = (event: BeforeUnloadEvent) => {
-      if (isActive || counter > 0 || secs < 57) {
+      if (isActive || counter > 0 || (min !== 25 && secs < 57)) {
         event.preventDefault();
         // legacy support
         event.returnValue = "";
@@ -97,7 +98,7 @@ const Timer = () => {
      
     window.addEventListener("beforeunload", unloadCallback);
     return () => window.removeEventListener("beforeunload", unloadCallback);
-  }, [isActive, counter]);
+  }, [isActive, counter, secs]);
     
   return (
     <>
