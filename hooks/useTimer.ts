@@ -1,4 +1,3 @@
-import { makeSound } from "@/utils/audio"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -45,10 +44,11 @@ const useTimer = (): timerType => {
       interval = setInterval(() => {
         if (seconds === 0) {
           if (minutes === 0) {
+            setResetState(true)
+            setIsActive(false)
+
             if (status == Status.POMO) {
-              setResetState(true)
               setCounter(counter + 1)
-              setIsActive(false)
               setIsPromoComplete(true)
             }
             clearInterval(interval)

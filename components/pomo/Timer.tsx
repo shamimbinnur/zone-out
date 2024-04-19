@@ -54,7 +54,8 @@ const Timer = () => {
     },
     from: { opacity: 0 }
   })
-
+  
+  // todo: leverage this function to handle button text
   const handleButtonText = () => {  
     if (isActive) {
       return "Pause"
