@@ -85,6 +85,7 @@ const useTimer = (): timerType => {
     setResetState(true)
     setIsPromoComplete(false)
     setIsActive(false)
+    setStatus(Status.POMO)
     setMinutes(InitialMin.POMO)
     setSeconds(0)
   };
