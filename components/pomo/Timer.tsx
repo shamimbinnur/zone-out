@@ -84,6 +84,20 @@ const Timer = () => {
       makeSound("HEADS-UP")
     }
   }, [min, secs])
+
+  useEffect(() => {
+    const unloadCallback = (event: BeforeUnloadEvent) => {
+      if (isActive || counter > 0 || secs < 57) {
+        event.preventDefault();
+        // legacy support
+        event.returnValue = "";
+        return "";
+      }
+    };
+     
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, [isActive, counter]);
     
   return (
     <>
