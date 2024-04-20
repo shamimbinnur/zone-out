@@ -25,8 +25,8 @@ const Timer = () => {
     pauseTimer,
     increaseMinutes,
     decreaseMinutes,
-    shortBreakToggle,
-    longBreakToggle,
+    toggleShortBreak,
+    toggleLongBreak,
   } = useTimer()
 
   const [isVisible, setIsVisible] = useState(false)
@@ -121,8 +121,8 @@ const Timer = () => {
         </div>
 
         <ActionBtnGroup
-          toggleShortBreak={shortBreakToggle}
-          toggleLongBreak={longBreakToggle}
+          toggleShortBreak={toggleShortBreak}
+          toggleLongBreak={toggleLongBreak}
           toggleTimer={toggleTimer}
           handleButtonText={handleButtonText}
           isActive={isActive}

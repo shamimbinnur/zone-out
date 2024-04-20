@@ -2,22 +2,22 @@ import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 type timerType = {
-  min: number,
   secs: number,
+  min: number,
+  status: Status,
   isActive: boolean,
-  pomoCount: number,
   isPromoComplete: boolean,
-  resetState: boolean,
+  pomoCount: number,
   shortCount: number,
   longCount: number,
-  status: Status,
-  shortBreakToggle: () => void,
-  longBreakToggle: () => void,
+  resetState: boolean,
+  resetTimer: () => void,
+  toggleTimer: () => void,
+  pauseTimer: () => void
   increaseMinutes: () => void,
   decreaseMinutes: () => void,
-  toggleTimer: () => void,
-  resetTimer: () => void,
-  pauseTimer: () => void
+  toggleShortBreak: () => void,
+  toggleLongBreak: () => void,
 }
 
 export enum Status {
@@ -63,7 +63,7 @@ const useTimer = (): timerType => {
               setLongCount(longCount + 1)
             }
             clearInterval(interval)
-          }else {
+          } else {
             setMinutes(minutes - 1)
             setSeconds(59)
           }
@@ -79,17 +79,18 @@ const useTimer = (): timerType => {
   }, [isActive, minutes, seconds])
 
   const toggleTimer = () => {
+    // If the timer was set to BREAK previously, reset the time to initial min.
+    if (status !== Status.POMO) {
+      setMinutes(InitialMin.POMO)
+      setSeconds(0)
+    }
+    
     if (minutes === 0 && seconds === 0){
       setIsActive(false)
       resetTimer()
     }
-    // If the timer was set to BREAK previously, reset the time to initial min.
-    if (status != Status.POMO) {
-      setMinutes(InitialMin.POMO)
-      setSeconds(0)
-    }
-    setStatus(Status.POMO);
     setIsActive(!isActive)
+    setStatus(Status.POMO);
   };
 
   const resetTimer = () => {
@@ -135,7 +136,7 @@ const useTimer = (): timerType => {
     setMinutes(minutes - 5)
   }
 
-  const shortBreakToggle = () => {
+  const toggleShortBreak = () => {
     if (status == Status.SHORT) {
       setIsActive(!isActive)
       return
@@ -145,7 +146,7 @@ const useTimer = (): timerType => {
     setIsActive(!isActive)
   }
 
-  const longBreakToggle = () => {
+  const toggleLongBreak = () => {
     if (status == Status.LONG) {
       setIsActive(!isActive)
       return
@@ -169,10 +170,10 @@ const useTimer = (): timerType => {
       toggleTimer()
     }
     else if (status == Status.SHORT) {
-      shortBreakToggle()
+      toggleShortBreak()
     }
     else if (status == Status.LONG) {
-      longBreakToggle()
+      toggleLongBreak()
     }
   }
 
@@ -186,8 +187,8 @@ const useTimer = (): timerType => {
     shortCount,
     longCount,
     status,
-    shortBreakToggle,
-    longBreakToggle,
+    toggleShortBreak,
+    toggleLongBreak,
     increaseMinutes,
     decreaseMinutes,
     toggleTimer,
