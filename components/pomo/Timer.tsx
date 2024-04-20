@@ -16,7 +16,10 @@ const Timer = () => {
     secs,
     isActive,
     counter,
+    status,
     isPromoComplete,
+    shortCount,
+    longCount,
     shortBreakToggle,
     longBreakToggle,
     toggleTimer,
@@ -144,6 +147,9 @@ const Timer = () => {
           isActive={isActive}
           pauseTimer={pauseTimer}
           count={counter}
+          shortCount={shortCount}
+          longCount={longCount}
+          status={status}
         />
       </section>
     </>

@@ -4,6 +4,7 @@ import { MdArrowLeft, MdArrowRight } from 'react-icons/md';
 import { FaPause, FaWalking } from 'react-icons/fa';
 import { BsStars } from 'react-icons/bs';
 import { CiCoffeeCup } from 'react-icons/ci';
+import { Status } from '@/hooks/useTimer';
 
 interface ActionBtnGroupProps {
   toggleShortBreak: () => void
@@ -13,6 +14,9 @@ interface ActionBtnGroupProps {
   handleButtonText: () => string
   pauseTimer: () => void
   count: number
+  shortCount: number
+  longCount: number
+  status: Status
 }
 
 const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
@@ -21,7 +25,10 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   toggleTimer,
   isActive,
   pauseTimer,
-  count
+  status,
+  count,
+  shortCount,
+  longCount
 }) => {
 
   const [buttonPosition, setButtonPosition] = useState(0)
@@ -124,6 +131,16 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count])
+
+  useEffect(() => {
+    if (status == Status.SHORT) {
+      handleLeftButtonClick()
+    }
+    else if (status == Status.LONG) {
+      handleRightButtonClick()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shortCount, longCount])
   
   return (
     <section className="flex relative justify-center items-center gap-x-8">

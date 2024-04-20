@@ -8,6 +8,9 @@ type timerType = {
   counter: number,
   isPromoComplete: boolean,
   resetState: boolean,
+  shortCount: number,
+  longCount: number,
+  status: Status,
   shortBreakToggle: () => void,
   longBreakToggle: () => void,
   increaseMinutes: () => void,
@@ -33,6 +36,8 @@ const useTimer = (): timerType => {
   const [seconds, setSeconds] = useState<number>(0)
   const [isActive, setIsActive] = useState<boolean>(false)
   const [counter, setCounter] = useState<number>(0)
+  const [shortCount, setShortCount] = useState<number>(0)
+  const [longCount, setLongCount] = useState<number>(0)
   const [status, setStatus] = useState<Status>(Status.POMO)
   const [isPromoComplete, setIsPromoComplete] = useState<boolean>(false)
   const [resetState, setResetState] = useState<boolean>(true)
@@ -51,8 +56,14 @@ const useTimer = (): timerType => {
               setCounter(counter + 1)
               setIsPromoComplete(true)
             }
+            else if (status == Status.SHORT) {
+              setShortCount(shortCount + 1)
+            }
+            else if (status == Status.LONG) {
+              setLongCount(longCount + 1)
+            }
             clearInterval(interval)
-          } else {
+          }else {
             setMinutes(minutes - 1)
             setSeconds(59)
           }
@@ -172,6 +183,9 @@ const useTimer = (): timerType => {
     counter,
     isPromoComplete,
     resetState,
+    shortCount,
+    longCount,
+    status,
     shortBreakToggle,
     longBreakToggle,
     increaseMinutes,
