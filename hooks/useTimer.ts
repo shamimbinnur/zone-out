@@ -5,7 +5,7 @@ type timerType = {
   min: number,
   secs: number,
   isActive: boolean,
-  counter: number,
+  pomoCount: number,
   isPromoComplete: boolean,
   resetState: boolean,
   shortCount: number,
@@ -35,7 +35,7 @@ const useTimer = (): timerType => {
   const [minutes, setMinutes] = useState<number>(InitialMin.POMO)
   const [seconds, setSeconds] = useState<number>(0)
   const [isActive, setIsActive] = useState<boolean>(false)
-  const [counter, setCounter] = useState<number>(0)
+  const [pomoCount, setPomoCount] = useState<number>(0)
   const [shortCount, setShortCount] = useState<number>(0)
   const [longCount, setLongCount] = useState<number>(0)
   const [status, setStatus] = useState<Status>(Status.POMO)
@@ -53,7 +53,7 @@ const useTimer = (): timerType => {
             setIsActive(false)
 
             if (status == Status.POMO) {
-              setCounter(counter + 1)
+              setPomoCount(pomoCount + 1)
               setIsPromoComplete(true)
             }
             else if (status == Status.SHORT) {
@@ -180,7 +180,7 @@ const useTimer = (): timerType => {
     min: minutes,
     secs: seconds,
     isActive,
-    counter,
+    pomoCount,
     isPromoComplete,
     resetState,
     shortCount,

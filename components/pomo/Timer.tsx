@@ -15,7 +15,7 @@ const Timer = () => {
     min,
     secs,
     isActive,
-    counter,
+    pomoCount,
     status,
     isPromoComplete,
     shortCount,
@@ -92,7 +92,7 @@ const Timer = () => {
   // Beforeunload event listener
   useEffect(() => {
     const unloadCallback = (event: BeforeUnloadEvent) => {
-      if (isActive || counter > 0 || (min !== 25 && secs < 57)) {
+      if (isActive || pomoCount > 0 || (min !== 25 && secs < 57)) {
         event.preventDefault();
         // legacy support
         event.returnValue = "";
@@ -102,14 +102,14 @@ const Timer = () => {
      
     window.addEventListener("beforeunload", unloadCallback);
     return () => window.removeEventListener("beforeunload", unloadCallback);
-  }, [isActive, counter, secs, min]);
+  }, [isActive, pomoCount, secs, min]);
     
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}`} />
       <section className="min-h-screen px-8 flex flex-col justify-center gap-y-20 items-center">
         <animated.div style={commonButtonProps}>
-          <Progressbar completed={counter} />
+          <Progressbar completed={pomoCount} />
         </animated.div>
 
         <div className="max-w-[660px] scale-95 _410:scale-100 px-10 py-8 flex justify-center ring-1 ring-out-green-200 rounded-3xl sm:rounded-[52px] relative">
@@ -146,7 +146,7 @@ const Timer = () => {
           handleButtonText={handleButtonText}
           isActive={isActive}
           pauseTimer={pauseTimer}
-          count={counter}
+          pomoCount={pomoCount}
           shortCount={shortCount}
           longCount={longCount}
           status={status}

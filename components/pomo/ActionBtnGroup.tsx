@@ -13,7 +13,7 @@ interface ActionBtnGroupProps {
   isActive: boolean
   handleButtonText: () => string
   pauseTimer: () => void
-  count: number
+  pomoCount: number
   shortCount: number
   longCount: number
   status: Status
@@ -26,7 +26,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   isActive,
   pauseTimer,
   status,
-  count,
+  pomoCount,
   shortCount,
   longCount
 }) => {
@@ -122,15 +122,15 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   }
 
   useEffect(() => {
-    if (count > 0 && count < 4) {
+    if (pomoCount > 0 && pomoCount < 4) {
       // If a pomodoro is completed, bring the 'short break' button to the middle of action-button component to make it more accessible for the user.
       handleRightButtonClick()
-    } else if (count === 4) {
+    } else if (pomoCount === 4) {
       // If 4 pomodoros are completed, bring the 'long break' button to the middle of action-button component to make it more accessible for the user.
       handleLeftButtonClick()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [count])
+  }, [pomoCount])
 
   useEffect(() => {
     if (status == Status.SHORT) {
