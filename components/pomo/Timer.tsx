@@ -12,21 +12,21 @@ import { makeSound } from '@/utils/audio'
 
 const Timer = () => {
   const {
-    min,
     secs,
-    isActive,
-    pomoCount,
+    min,
     status,
+    isActive,
     isPromoComplete,
+    pomoCount,
     shortCount,
     longCount,
-    shortBreakToggle,
-    longBreakToggle,
-    toggleTimer,
     resetTimer,
+    toggleTimer,
+    pauseTimer,
     increaseMinutes,
     decreaseMinutes,
-    pauseTimer
+    shortBreakToggle,
+    longBreakToggle,
   } = useTimer()
 
   const [isVisible, setIsVisible] = useState(false)
@@ -48,39 +48,18 @@ const Timer = () => {
     },
     from: { transform: 'translateY(0)' }
   })
-
-  const timePillContainer = useSpring({
-    opacity: isActive ? 0 : 1,
-    config: {
-      duration: 100,
-      transition: 'ease-in-out'
-    },
-    from: { opacity: 0 }
-  })
   
   // todo: leverage this function to handle button text
   const handleButtonText = () => {  
-    if (isActive) {
-      return "Pause"
-    } else {
-      if (isPromoComplete) {
-        return "Restart"
-      } else {
-        return "Start"
-      }
-    }
+    return isActive ? "Pause" : (isPromoComplete ? "Restart" : "Start");
   }
 
   useEffect(() => {
-    if (isActive) {
-      setIsVisible(false)
-    } else {
-      setIsVisible(true)
-    }
+    setIsVisible(!isActive);
   }, [isActive])
 
   useEffect(() => {
-    isActive ? document.title = `${min} : ${secs}` : document.title = "Pomodoro Timer"
+    document.title = isActive ? `${min}:${secs}` : "Pomodoro Timer";
   },[isActive, min, secs])
 
   useEffect(() => {
@@ -88,11 +67,13 @@ const Timer = () => {
       makeSound("HEADS-UP")
     }
   }, [min, secs])
+  
 
   // Beforeunload event listener
   useEffect(() => {
     const unloadCallback = (event: BeforeUnloadEvent) => {
-      if (isActive || pomoCount > 0 || (min !== 25 && secs < 57)) {
+      const isActiveAndImportant = isActive || pomoCount > 0 || (min !== 25 && secs < 57)
+      if (isActiveAndImportant) {
         event.preventDefault();
         // legacy support
         event.returnValue = "";
