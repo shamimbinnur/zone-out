@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { animated } from '@react-spring/web'
 import { IoMdAdd, IoMdRemove } from 'react-icons/io'
 import { GrPowerReset } from 'react-icons/gr'

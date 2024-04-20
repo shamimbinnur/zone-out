@@ -1,4 +1,4 @@
-import React, { FC, use, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { animated, useSpring } from '@react-spring/web'
 import { MdArrowLeft, MdArrowRight } from 'react-icons/md';
 import { FaPause, FaWalking } from 'react-icons/fa';
@@ -57,6 +57,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
         opacity: isActive ? 0 : 1
       }
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive])
 
   useEffect(() => {
@@ -70,6 +71,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
         opacity: isActive ? 1 : 0
       }
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive])
   
 

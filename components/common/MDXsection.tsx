@@ -1,6 +1,6 @@
 import { metaType } from '@/types/mdx'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 interface MDXsectionProps {
   content: string

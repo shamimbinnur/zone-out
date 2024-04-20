@@ -1,6 +1,5 @@
 import Background from '@/components/pomo/Background'
 import Timer from '@/components/pomo/Timer'
-import React from 'react'
 import { getPageContent } from '@/utils/mdx';
 import MDXsection from '@/components/common/MDXsection';
 
