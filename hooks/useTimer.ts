@@ -29,7 +29,7 @@ export enum Status {
 enum InitialMin {
   POMO = 25,
   SHORT = 1,
-  LONG = 15
+  LONG = 1
 }
 
 const useTimer = (): timerType => {
@@ -138,20 +138,22 @@ const useTimer = (): timerType => {
   }
 
   const toggleShortBreak = () => {
-    if (status == Status.SHORT) {
+    if (status == Status.SHORT && isActive) {
       setIsActive(!isActive)
       return
     }
+
     setStatus(Status.SHORT)
     resetTimeToShortBreak()
-    setIsActive(!isActive)
+    setIsActive(true)
   }
-
+  
   const toggleLongBreak = () => {
-    if (status == Status.LONG) {
+    if (status == Status.LONG && isActive) {
       setIsActive(!isActive)
       return
     }
+
     setStatus(Status.LONG)
     resetTimeToLongBreak()
     setIsActive(!isActive)
