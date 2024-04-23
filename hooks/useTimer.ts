@@ -28,8 +28,8 @@ export enum Status {
 
 enum InitialMin {
   POMO = 25,
-  SHORT = 1,
-  LONG = 1
+  SHORT = 5,
+  LONG = 15
 }
 
 const useTimer = (): timerType => {
@@ -66,7 +66,7 @@ const useTimer = (): timerType => {
             clearInterval(interval)
           } else {
             setMinutes(minutes - 1)
-            setSeconds(5)
+            setSeconds(59)
           }
         } else {
           setSeconds(seconds - 1)
