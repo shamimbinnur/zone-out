@@ -8,7 +8,8 @@ const makeSound = (soundType: SoundType): void => {
       break
     }
     case "SILENCE": {
-      const audio2 = new Audio("/audio/silence.wav")
+      const audio2 = new Audio("/audio/heads-up.mp3")
+      audio2.muted = true
       audio2.play()
       break
     }
