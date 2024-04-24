@@ -1,3 +1,4 @@
+import { makeSound } from "@/utils/audio"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
@@ -80,6 +81,9 @@ const useTimer = (): timerType => {
   }, [isActive, minutes, seconds])
 
   const toggleTimer = () => {
+    // Play silent audio to avoid browser restrictions on autoplay
+    makeSound("SILENCE")
+
     // If the timer was set to BREAK previously, reset the time to initial min.
     if (status !== Status.POMO) {
       setMinutes(InitialMin.POMO)

@@ -86,11 +86,6 @@ const Timer = () => {
     return () => window.removeEventListener("beforeunload", unloadCallback);
   }, [isActive, pomoCount, secs, min]);
 
-  // to initiate the sounds with silence audio so that browser treat the site as audio incorporated from the start
-  useEffect(() => {
-    makeSound("SILENCE")
-  }, [])
-
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}` } />
