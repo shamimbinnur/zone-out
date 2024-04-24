@@ -7,11 +7,6 @@ const nextConfig = {
         destination: '/pomo',
         permanent: true,
       },
-      {
-        source: '/',
-        destination: '/pomo',
-        permanent: false,
-      }
     ];
   }
 };
