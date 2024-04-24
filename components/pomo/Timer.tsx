@@ -1,6 +1,6 @@
 "use client"
 
-import useTimer from '@/hooks/useTimer'
+import useTimer, { Status } from '@/hooks/useTimer'
 import { useSpring } from '@react-spring/web'
 import { useEffect, useState } from 'react'
 import { animated } from '@react-spring/web'
@@ -30,6 +30,7 @@ const Timer = () => {
   } = useTimer()
 
   const [isVisible, setIsVisible] = useState(false)
+  const timerMode = status === Status.POMO ? "Pomodoro" : status === Status.SHORT ? "Break" : "Break"
 
   const commonButtonProps = useSpring({
     opacity: isVisible ? 1 : 0,
@@ -59,7 +60,7 @@ const Timer = () => {
   }, [isActive])
 
   useEffect(() => {
-    document.title = isActive ? `${min}:${secs}` : "Pomodoro Timer";
+    document.title = isActive ? `${min}:${secs} (${timerMode}) ` : "Pomodoro Timer";
   },[isActive, min, secs])
 
   useEffect(() => {
@@ -89,10 +90,10 @@ const Timer = () => {
   useEffect(() => {
     makeSound("SILENCE")
   }, [])
-  
+
   return (
     <>
-      <DocTitle documentTitle={`${min} : ${secs}`} />
+      <DocTitle documentTitle={`${min} : ${secs}` } />
       <section className="min-h-screen px-8 flex flex-col justify-center gap-y-20 items-center">
         <animated.div style={commonButtonProps}>
           <Progressbar completed={pomoCount} />
