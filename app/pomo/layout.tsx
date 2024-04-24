@@ -7,7 +7,7 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-const metaDescription = "Elevate your productivity with our Pomodoro Timer Online. Our timer is meticulously crafted with a distraction-minimizing interface and a soothing green theme, promoting better eye and mental health. Say goodbye to distractions and boost efficiency for optimal task management, standing out amidst a crowded sea of online Pomodoro timers."
+const metaDescription = "Online Pomodoro Timer, is truly designed to keep you focused. Sleek design, and greenish theme to ease your eyes, just one click away to start focusing."
 
 export const metadata: Metadata = {
   title: "Pomodoro Timer Online",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IE',
     url: 'https://zoneout.me/pomo',
-    title: 'Pomodoro Timer Online',
+    title: 'Online Pomodoro Timer',
     siteName: 'Zone Out',
     description: metaDescription,
     images: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
         url: `${process.env.MY_DOMAIN}/images/pomo-og.png` || "",
         width: 1200,
         height: 630,
-        alt: 'Zone Out',
+        alt: 'Online Pomodoro Timer',
       },
     ],
   },
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
         url: `${process.env.MY_DOMAIN}/images/pomo-og.png` || "",
         width: 1200,
         height: 630,
-        alt: 'Zone Out',
+        alt: 'Pomodoro Timer Online',
       },
     ],
   },

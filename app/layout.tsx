@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const metaDescription = "Elevate your productivity with our comprehensive suite of tools. Designed to foster deep focus and prevent burnout, Zone Out maximizes efficiency for optimal task management"
+const metaDescription = "Boost your productivity using the smartest and most curated tools. We glue you to your work, not to our app."
 export const metadata: Metadata = {
   title: "Zone Out",
   description: metaDescription,
