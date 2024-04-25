@@ -15,7 +15,7 @@ const MDXsection:FC<MDXsectionProps> = ({
       <section
         className="
         text-stone-950
-          mx-auto max-w-5xl px-4 pt-16 sm:pt-32 pb-14 prose
+          mx-auto max-w-5xl px-8 md:px-4 pt-16 sm:pt-32 pb-14 prose
           prose-h1:text-4xl prose-h1:font-semibold prose-h1:tracking-normal prose-h1:leading-tight prose-h1:mb-16
           prose-h2:text-3xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:leading-tight
           prose-p:text-lg prose-p:font-normal prose-p:tracking-normal prose-p:leading-normal prose-p:my-6
