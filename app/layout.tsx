@@ -1,9 +1,9 @@
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { Analytics } from '@vercel/analytics/react';
-import { Toaster } from 'sonner'
 import { ReactNode } from "react";
+import { Toaster } from 'sonner'
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   // Twitter
   twitter: {
     title: 'Zone Out',
-    site: '@zoneout.me',
+    site: 'https://zoneout.me',
     card: 'summary_large_image',
     description: metaDescription,
     images: [
