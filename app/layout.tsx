@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const metaDescription = "Boost your productivity using the smartest and most curated tools. We glue you to your work, not to our app."
 export const metadata: Metadata = {
-  title: "Zone Out",
+  title: "ZoneOut",
   description: metaDescription,
   metadataBase: new URL("https://zoneout.me"),
   icons: [
@@ -33,22 +33,22 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IE',
     url: 'https://zoneout.me',
-    title: 'Zone Out',
-    siteName: 'Zone Out',
+    title: 'ZoneOut',
+    siteName: 'ZoneOut',
     description: metaDescription,
     images: [
       {
         url: `${process.env.MY_DOMAIN}/images/og.png` || "",
         width: 1200,
         height: 630,
-        alt: 'Zone Out',
+        alt: 'ZoneOut',
       },
     ],
   },
 
   // Twitter
   twitter: {
-    title: 'Zone Out',
+    title: 'ZoneOut',
     site: 'https://zoneout.me',
     card: 'summary_large_image',
     description: metaDescription,
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
         url: `${process.env.MY_DOMAIN}/images/og.png` || "",
         width: 1200,
         height: 630,
-        alt: 'Zone Out',
+        alt: 'ZoneOut',
       },
     ],
   },

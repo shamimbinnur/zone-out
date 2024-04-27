@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     locale: 'en_IE',
     url: 'https://zoneout.me/pomo',
     title: 'Online Pomodoro Timer',
-    siteName: 'Zone Out',
+    siteName: 'ZoneOut',
     description: metaDescription,
     images: [
       {
