@@ -221,7 +221,10 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
 
             <button
               disabled={buttonPosition !== ButtonPosition.RIGHT}
-              className="text-nowrap flex items-center gap-1" onClick={toggleShortBreak} >
+              className="text-nowrap flex items-center
+              transform transition-all outline-none
+              focus-visible:text-white  gap-1"
+               onClick={toggleShortBreak} >
               <CiCoffeeCup className="text-lg" />
               Short break
             </button>
