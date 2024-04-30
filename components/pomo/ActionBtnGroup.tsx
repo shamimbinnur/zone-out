@@ -19,6 +19,15 @@ interface ActionBtnGroupProps {
   status: Status
 }
 
+export enum ButtonPosition {
+  // eslint-disable-next-line no-unused-vars
+  LEFT = -1,
+  // eslint-disable-next-line no-unused-vars
+  MIDDLE = 0,
+  // eslint-disable-next-line no-unused-vars
+  RIGHT = 1
+}
+
 const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   toggleShortBreak,
   toggleLongBreak,
@@ -31,7 +40,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   longCount
 }) => {
 
-  const [buttonPosition, setButtonPosition] = useState(0)
+  const [buttonPosition, setButtonPosition] = useState<ButtonPosition>(ButtonPosition.MIDDLE)
   const [pillProps, api] =  useSpring(() => ({ x: 0, scale: 1 }), [])
 
   // useEffect(() => {api.start({ x: 0 }) }, [])
@@ -77,12 +86,12 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
 
   const handleLeftButtonClick = () => {
     // If button is in the middle, move it to the left
-    if (buttonPosition == 0) {
+    if (buttonPosition == ButtonPosition.MIDDLE) {
       api.start({ x: 155 })
-      setButtonPosition(-1)
+      setButtonPosition(ButtonPosition.LEFT)
     }
     // If button is on the right, shake the button.
-    else if (buttonPosition == -1) {
+    else if (buttonPosition == ButtonPosition.LEFT) {
       api.start({ 
         config: { tension: 180, friction: 8 },
         from: { x: 150 },
@@ -90,22 +99,22 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       })
     }
     // If button is on the left, let it go back to the middle
-    else if (buttonPosition == 1) {
+    else if (buttonPosition == ButtonPosition.RIGHT) {
       api.start({
         x: 0,
         config: { tension: 170, friction: 26 }
       })
-      setButtonPosition(0)
+      setButtonPosition(ButtonPosition.MIDDLE)
     }
   }
 
   const handleRightButtonClick = () => {
     // If button is in the middle, move it to the right
-    if (buttonPosition == 0) {
+    if (buttonPosition == ButtonPosition.MIDDLE) {
       api.start({ x: -155 })
-      setButtonPosition(1)
+      setButtonPosition(ButtonPosition.RIGHT)
     }
-    else if (buttonPosition == 1) {
+    else if (buttonPosition == ButtonPosition.RIGHT) {
       // If button is on the right, shake the button.
       api.start({ 
         config: { tension: 180, friction: 8 },
@@ -113,13 +122,13 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
         to: { x: -155 }
       })
     }
-    else if (buttonPosition == -1) {
+    else if (buttonPosition == ButtonPosition.LEFT) {
       // If button is on the left, let it go back to the middle
       api.start({
         x: 0,
         config: { tension: 170, friction: 26 }
       })
-      setButtonPosition(0)
+      setButtonPosition(ButtonPosition.MIDDLE)
     }
   }
 
@@ -150,8 +159,12 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       style={swipeButtonProps}
       onClick={handleLeftButtonClick}
       disabled={isActive}
-      className="rounded-full border translate-y-[1px] border-out-green-1000 border-opacity-55 bg-out-green-800 transition-all">
+      className="rounded-full border translate-y-[1px] outline-none
+        focus-visible:ring-white focus-visible:ring-opacity-65
+        focus-visible:ring border-out-green-1000 border-opacity-55
+        bg-out-green-800 transition-all">
         <MdArrowLeft className="text-out-green-1000 text-3xl scale-125"/>
+        <span className="sr-only">Previous option</span>
       </animated.button>
 
       <animated.div style={pillContainer} className="w-[160px] py-1 border border-out-green-200 mx-auto bg-out-green-1000 rounded-[52px] overflow-x-hidden">
@@ -159,17 +172,31 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
           style={pillProps}
           className="select-none mx-auto text-base font-bold text-out-green-400 flex items-center justify-center gap-x-14"
           >
-            <button className="text-nowrap flex items-center gap-1" onClick={toggleLongBreak} >
-              <FaWalking className="text-lg" />
-              Long break
+            <button
+              disabled={buttonPosition !== ButtonPosition.LEFT }
+              className="text-nowrap flex
+              transform transition-all
+              outline-none focus-visible:text-white
+              items-center gap-1"
+              onClick={toggleLongBreak}>
+                <FaWalking className="text-lg" />
+                Long break
             </button>
 
-            <animated.button onClick={toggleTimer} className="text-2xl flex items-center justify-center gap-2">
+            <animated.button
+              disabled={buttonPosition !== ButtonPosition.MIDDLE || isActive}
+              onClick={toggleTimer}
+              className="text-2xl flex items-center
+              transform transition-all outline-none
+              focus-visible:text-white rounded-lg
+              justify-center gap-2">
               <BsStars className="text-xl" />
               Start
             </animated.button>
 
-            <button className="text-nowrap flex items-center gap-1" onClick={toggleShortBreak} >
+            <button
+              disabled={buttonPosition !== ButtonPosition.RIGHT}
+              className="text-nowrap flex items-center gap-1" onClick={toggleShortBreak} >
               <CiCoffeeCup className="text-lg" />
               Short break
             </button>
@@ -180,8 +207,13 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       onClick={handleRightButtonClick}
       style={swipeButtonProps}
       disabled={isActive}
-      className="rounded-full border translate-y-[1px] border-opacity-55 border-out-green-1000 flex items-center justify-center bg-out-green-800 transition-all">
+      className="rounded-full border translate-y-[1px]
+        border-opacity-55 border-out-green-1000 flex
+        items-center justify-center bg-out-green-800
+        outline-none focus-visible:ring-white focus-visible:ring-opacity-65
+        focus-visible:ring transition-all">
         <MdArrowRight className="text-out-green-1000 text-3xl scale-125"/>
+        <span className="sr-only">Next option</span>
       </animated.button>
 
       {/* Pause Button */}
