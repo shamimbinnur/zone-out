@@ -86,6 +86,25 @@ const Timer = () => {
     return () => window.removeEventListener("beforeunload", unloadCallback);
   }, [isActive, pomoCount, secs, min]);
 
+   // Keyboard shortcuts
+   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        increaseMinutes();
+      }
+      else if (event.key === "ArrowDown") {
+        event.preventDefault();
+        decreaseMinutes();
+      }
+      else if (event.key === "r" || event.key === "R") {
+        resetTimer();
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [min])
+
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}` } />
