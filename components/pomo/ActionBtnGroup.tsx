@@ -152,6 +152,31 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shortCount, longCount])
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight") {
+        handleRightButtonClick();
+      }
+      if (event.key === "ArrowLeft") {
+        handleLeftButtonClick();
+      }
+      if (event.key === "Enter") {
+        if (buttonPosition === ButtonPosition.LEFT) {
+          toggleLongBreak();
+        }
+        else if (buttonPosition === ButtonPosition.MIDDLE) {
+          toggleTimer();
+        }
+        else if (buttonPosition === ButtonPosition.RIGHT) {
+          toggleShortBreak();
+        }
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [buttonPosition, isActive, toggleLongBreak, toggleShortBreak, toggleTimer])
   
   return (
     <section className="flex relative justify-center items-center gap-x-8">
