@@ -9,7 +9,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ['var(--font-inter)', 'sans-serif,'],
+        archivo: ['var(--font-archivo)', 'inter', 'sans-serif'],
+      },
       screens: {
+        '1088': '1088px',
         '_410': '410px',
       },
       colors: {
@@ -25,9 +30,6 @@ const config: Config = {
         ...mauve,
         ...slate,
         ...violet,
-      },
-      fontFamily: {
-        inter: ["Inter", "sans-serif"],
       },
       backgroundImage: {
         'forest': "url('/images/forest.png')",

@@ -1,11 +1,19 @@
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Archivo, Inter } from "next/font/google";
 import { ReactNode } from "react";
 import { Toaster } from 'sonner'
 import "./globals.css";
+import { twMerge } from 'tailwind-merge'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+const archivo = Archivo({
+  subsets: ['latin'],
+  variable: '--font-archivo',
+})
 
 const metaDescription = "Boost your productivity using the smartest and most curated tools. We glue you to your work, not to our app."
 export const metadata: Metadata = {
@@ -70,7 +78,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={twMerge(
+        inter.className,
+        inter.variable,
+        archivo.variable,
+      )}>
         {children}
         <Toaster gap={4} duration={3000} />
         <Analytics/>
