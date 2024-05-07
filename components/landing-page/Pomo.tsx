@@ -3,7 +3,7 @@ import Link from "next/link"
 
 const Pomo = () => {
   return (
-    <div className="border rounded-md max-w-[780px] border-gray-100 p-6 mx-auto mt-16 mb-16">
+    <div className="border rounded-md max-w-[780px] border-gray-100 border-opacity-20 p-6 mx-auto mt-16 mb-16">
       <Image
         alt="Online Pomodoro timer"
         src="/images/pomo-cover.png"
