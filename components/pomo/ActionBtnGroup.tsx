@@ -179,7 +179,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   }, [buttonPosition, isActive, toggleLongBreak, toggleShortBreak, toggleTimer])
   
   return (
-    <section className="flex relative justify-center items-center gap-x-8">
+    <section className="flex font-archivo relative justify-center items-center gap-x-8">
       <animated.button
       style={swipeButtonProps}
       onClick={handleLeftButtonClick}
