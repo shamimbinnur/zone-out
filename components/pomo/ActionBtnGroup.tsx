@@ -179,23 +179,23 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
   }, [buttonPosition, isActive, toggleLongBreak, toggleShortBreak, toggleTimer])
   
   return (
-    <section className="flex relative justify-center items-center gap-x-8">
+    <section className="flex font-archivo relative justify-center items-center gap-x-8">
       <animated.button
       style={swipeButtonProps}
       onClick={handleLeftButtonClick}
       disabled={isActive}
       className="rounded-full border translate-y-[1px] outline-none
         focus-visible:ring-white focus-visible:ring-opacity-65
-        focus-visible:ring border-out-green-1000 border-opacity-55
-        bg-out-green-800 transition-all">
-        <MdArrowLeft className="text-out-green-1000 text-3xl scale-125"/>
+        focus-visible:ring border-opacity-55
+        border-evergreen-meadow mx-auto bg-shadowy-forest transition-all">
+        <MdArrowLeft className="text-turquoise-tide text-3xl scale-125"/>
         <span className="sr-only">Previous option</span>
       </animated.button>
 
-      <animated.div style={pillContainer} className="w-[160px] py-1 border border-out-green-200 mx-auto bg-out-green-1000 rounded-[52px] overflow-x-hidden">
+      <animated.div style={pillContainer} className="w-[160px] py-1 border border-evergreen-meadow mx-auto bg-shadowy-forest rounded-[52px] overflow-x-hidden">
         <animated.div
           style={pillProps}
-          className="select-none mx-auto text-base font-bold text-out-green-400 flex items-center justify-center gap-x-14"
+          className="select-none mx-auto text-base font-bold text-turquoise-tide flex items-center justify-center gap-x-14"
           >
             <button
               disabled={buttonPosition !== ButtonPosition.LEFT }
@@ -236,11 +236,11 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       style={swipeButtonProps}
       disabled={isActive}
       className="rounded-full border translate-y-[1px]
-        border-opacity-55 border-out-green-1000 flex
-        items-center justify-center bg-out-green-800
+        border-opacity-55 border-evergreen-meadow mx-auto bg-shadowy-forest
+        flex items-center justify-center
         outline-none focus-visible:ring-white focus-visible:ring-opacity-65
         focus-visible:ring transition-all">
-        <MdArrowRight className="text-out-green-1000 text-3xl scale-125"/>
+        <MdArrowRight className="text-turquoise-tide text-3xl scale-125"/>
         <span className="sr-only">Next option</span>
       </animated.button>
 
@@ -249,7 +249,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       <animated.button
       onClick={pauseTimer}
       style={pauseBtnProps}
-      className="bg-out-green-1000 border border-out-green-200 rounded-full absolute text-sm p-4 text-white">
+      className="bg-shadowy-forest border border-evergreen-meadow rounded-full absolute text-sm p-4 text-turquoise-tide">
         <FaPause/>
       </animated.button>}
     </section>

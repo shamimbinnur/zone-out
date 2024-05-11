@@ -24,6 +24,15 @@ const config: Config = {
         "out-green-400": "#4CA069",
         "out-green-200": "#7ED09A",
 
+        //  New colors
+        "midnight-moss": "#14231A",
+        "shadowy-forest": "#061F0F",
+        "evergreen-meadow": "#02551F",
+        "turquoise-tide": "#2A998C",
+        "coastal-blue": "#237995",
+        "ember-glow": "#801D07",
+        "moonlit-silver": "#C3C3C3",
+
         // Radix UI colors
         ...blackA,
         ...green,

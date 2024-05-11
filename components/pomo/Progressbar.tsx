@@ -29,17 +29,17 @@ const Ball:FC <BallProps> = ({
   return (
     <div className="z-50 flex items-center justify-center rounded-full">
       {status === 'COMPLETE' && 
-      <div className="w-5 h-5 p-1 bg-out-green-1000 flex justify-center items-center rounded-full">
-        <FaCheck className="text-white text-md rounded-full" />
+      <div className="w-5 h-5 p-1 bg-turquoise-tide flex justify-center items-center rounded-full">
+        <FaCheck className="text-moonlit-silver text-md rounded-full" />
       </div>}
 
       {status === 'ACTIVE' &&
-      <div className="w-5 h-5 p-1 bg-out-green-1000 flex justify-center items-center rounded-full">
-        <div className="w-full h-full bg-white rounded-full"></div>
+      <div className="w-5 h-5 p-1 bg-turquoise-tide flex justify-center items-center rounded-full">
+        <div className="w-full h-full bg-moonlit-silver rounded-full"></div>
       </div>}
 
       {status === 'INACTIVE' &&
-      <div className="w-3 h-3 bg-out-green-1000 flex justify-center items-center rounded-full">
+      <div className="w-3 h-3 bg-turquoise-tide flex justify-center items-center rounded-full">
       </div>}
     </div>
   )

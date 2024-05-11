@@ -113,8 +113,8 @@ const Timer = () => {
           <Progressbar completed={pomoCount} />
         </animated.div>
 
-        <section className="max-w-[660px] scale-95 _410:scale-100 px-10 py-8 flex justify-center ring-1 ring-out-green-200 rounded-3xl sm:rounded-[52px] relative">
-          <div className="h-full w-full rounded-3xl sm:rounded-[52px] absolute top-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[rgba(83, 140, 103, 0.28)] border-out-green-200 to-[rgba(76, 160, 105, 0.26)] opacity-30 drop-shadow-md"></div>
+        <section className="max-w-[660px] scale-95 _410:scale-100 px-10 py-8 flex justify-center ring-1 bg-shadowy-forest ring-evergreen-meadow rounded-3xl sm:rounded-[52px] relative">
+          {/* <div className="h-full w-full rounded-3xl sm:rounded-[52px] absolute top-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[rgba(83, 140, 103, 0.28)] border-out-green-200 to-[rgba(76, 160, 105, 0.26)] opacity-30 drop-shadow-md"></div> */}
           <div className="flex flex-col relative items-center ">
             <UtilityBtn
               resetBtnAnimationProps={commonButtonProps}
