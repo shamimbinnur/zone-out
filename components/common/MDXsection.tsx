@@ -11,7 +11,7 @@ const MDXsection:FC<MDXsectionProps> = ({
   content
 }) => {
   return (
-    <div className="bg-stone-50">
+    <div className="bg-stone-50 font-inter">
       <section
         className="
         text-stone-950

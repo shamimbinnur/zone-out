@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import { ReactNode } from "react";
-
-const poppins = Poppins({
-  weight: ["700", "400", "500"],
-  subsets: ["latin"],
-});
 
 const metaDescription = "Online Pomodoro Timer, is truly designed to keep you focused. Sleek design, and greenish theme to ease your eyes, just one click away to start focusing."
 
@@ -71,7 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body>
         {children}
       </body>
     </html>
