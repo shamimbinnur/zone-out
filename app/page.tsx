@@ -5,7 +5,6 @@ export default function Home() {
   return (
     <main className="h-fit w-full px-8">
       <Hero />
-      <Pomo />
     </main>
   );
 }
