@@ -249,7 +249,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       <animated.button
       onClick={pauseTimer}
       style={pauseBtnProps}
-      className="bg-out-green-1000 border border-out-green-200 rounded-full absolute text-sm p-4 text-white">
+      className="bg-shadowy-forest border border-evergreen-meadow rounded-full absolute text-sm p-4 text-turquoise-tide">
         <FaPause/>
       </animated.button>}
     </section>
