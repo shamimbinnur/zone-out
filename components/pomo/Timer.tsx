@@ -130,7 +130,13 @@ const Timer = () => {
                 <p className="sm:text-[182px] sm:w-56 text-[90px] font-semibold sm:font-medium text-white">{min < 10 ? `0${min}` : min}</p>
               </div>
               
-              <div className="bg-out-green-200 h-[90px] rounded-sm w-[4px]">
+              <div className="flex flex-col items-center gap-y-2">
+                {
+                  Array.from({ length: 3 }).map((_, index) => (
+                    <div key={index} className={` ${index % 2 === 0 ? "bg-moonlit-silver" : "bg-turquoise-tide"} h-[25px] rounded-sm w-[4px]`}>
+                    </div>
+                  ))
+                }
               </div>
 
               <div>
