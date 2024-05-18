@@ -5,10 +5,10 @@ import { Howl, Howler } from 'howler';
 import { FaBackwardStep, FaCirclePause, FaCirclePlay, FaForwardStep} from 'react-icons/fa6';
 
 import VolumePopover from './VolumePopover';
-import { AudioType } from '@/data/pomo/bgAudio';
+import { AudiosType } from '@/data/pomo/bgAudio';
 
 interface PlayerProps {
-  audios: AudioType;
+  audios: AudiosType;
 }
 
 const Player:FC <PlayerProps> = ({

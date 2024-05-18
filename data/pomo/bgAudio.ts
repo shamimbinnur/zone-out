@@ -1,11 +1,11 @@
-type Audio = {
+export type AudioType = {
   title: string,
   src: string
 };
 
-export type AudioType = Audio[];
+export type AudiosType = AudioType[];
 
-export const bgAudios: AudioType  = [
+export const bgAudios: AudiosType  = [
   {
     title: "Birds Chirping",
     src: "https://cisqwfbmfohpupsasjjq.supabase.co/storage/v1/object/sign/audio/audio/birds-19624.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdWRpby9hdWRpby9iaXJkcy0xOTYyNC5tcDMiLCJpYXQiOjE3MTU3NzcxNTksImV4cCI6MTc0NzMxMzE1OX0.esF28p4CQ57x_lF9IjmTOe3BRPV0FVCh0vdumThJ3Cs&t=2024-05-15T12%3A45%3A59.301Z",
