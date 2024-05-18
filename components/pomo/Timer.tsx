@@ -108,7 +108,7 @@ const Timer = () => {
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}` } />
-      <section className="min-h-screen px-8 flex flex-col justify-center gap-y-20 items-center">
+      <section style={{minHeight: "calc(100vh - 60px)"}} className="xmin-h-screen px-8 flex flex-col justify-center gap-y-20 items-center">
         <animated.div style={commonButtonProps}>
           <Progressbar completed={pomoCount} />
         </animated.div>

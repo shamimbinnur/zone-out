@@ -3,6 +3,7 @@ import Timer from '@/components/pomo/Timer'
 import { getPageContent } from '@/utils/mdx';
 import MDXsection from '@/components/common/MDXsection';
 import Menu from '@/components/pomo/Menu';
+import MenuBottom from '@/components/pomo/MenuBottom';
 
 
 const Page = () => {
@@ -13,6 +14,7 @@ const Page = () => {
       <Background>
         <Menu />
         <Timer />
+        <MenuBottom />
       </Background>
       <MDXsection meta={meta} content={content} />
     </main>
