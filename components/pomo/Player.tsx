@@ -74,7 +74,7 @@ const Player:FC <PlayerProps> = ({
 
   return (
     <div
-      className="relative bg-black w-fit h-fit px-3 py-2 rounded-full flex justify-center items-center gap-2"
+      className="relative bg-shadowy-forest bg-opacity-80 w-fit h-fit px-3 py-2 rounded-full flex justify-center items-center gap-2"
     >
       <button
         title={'Previous Track: '+audios[audioIndex === 0 ? audios.length - 1 : audioIndex - 1].title}

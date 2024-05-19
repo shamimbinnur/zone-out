@@ -20,7 +20,7 @@ const FooterNav = () => {
   ]
 
   return (
-    <nav className="w-fit h-fit bg-black rounded-lg py-1 px-2">
+    <nav className="w-fit h-fit bg-shadowy-forest bg-opacity-80 rounded-lg py-1 px-2">
       <ul className="flex items-center gap-x-2 text-base text-moonlit-silver">
         {links.map(({ href, label, icon }) => (
           <li key={label}>

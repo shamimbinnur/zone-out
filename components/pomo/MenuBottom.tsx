@@ -7,7 +7,7 @@ import FooterNav from "./FooterNav"
 
 const MenuBottom = () => {
   return (
-    <div className="h-[122px] sm:h-[60px] border px-10">
+    <div className="h-[122px] sm:h-[60px] px-4 sm:px-10">
       <DeskTopMenu />
       <MobileMenu />
     </div>
