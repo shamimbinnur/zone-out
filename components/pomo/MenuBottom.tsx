@@ -7,7 +7,7 @@ import FooterNav from "./FooterNav"
 
 const MenuBottom = () => {
   return (
-    <div className="h-[122px] sm:h-[60px] px-4 sm:px-10">
+    <div className="h-[122px] sm:h-[60px] mx-auto max-w-[378px] sm:max-w-full sm:px-10">
       <DeskTopMenu />
       <MobileMenu />
     </div>
@@ -29,12 +29,12 @@ const DeskTopMenu = () => {
 const MobileMenu = () => {
   return (
     <div className="flex sm:hidden flex-col items-center gap-y-8">
-      <Quotes quotes={quotes} />
-
       <div className="flex w-full justify-between">
         <FooterNav />
         <Player audios={bgAudios} />
       </div>
+      
+      <Quotes quotes={quotes} />
     </div>
   )
 }
