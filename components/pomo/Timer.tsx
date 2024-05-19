@@ -115,12 +115,12 @@ const Timer = () => {
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}` } />
-      <section className="timerMinHeight h-[calc(100vh - 60rem)] px-8 flex flex-col justify-center gap-y-20 items-center">
+      <section className="timerMinHeight px-8 flex flex-col justify-center gap-y-20 items-center">
         <animated.div style={commonButtonProps}>
           <Progressbar completed={pomoCount} />
         </animated.div>
 
-        <section className="max-w-[660px] scale-95 _410:scale-100 px-10 py-8 flex justify-center ring-1 bg-shadowy-forest ring-evergreen-meadow rounded-3xl sm:rounded-[52px] relative">
+        <section className="max-w-[660px] scale-95 _410:scale-100 px-10 py-8 flex justify-center ring-1 bg-shadowy-forest ring-evergreen-meadow ring-opacity-10 rounded-3xl sm:rounded-[52px] relative">
           {/* <div className="h-full w-full rounded-3xl sm:rounded-[52px] absolute top-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[rgba(83, 140, 103, 0.28)] border-out-green-200 to-[rgba(76, 160, 105, 0.26)] opacity-30 drop-shadow-md"></div> */}
           <div className="flex flex-col relative items-center ">
             <UtilityBtn

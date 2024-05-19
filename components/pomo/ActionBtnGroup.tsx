@@ -186,13 +186,13 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       disabled={isActive}
       className="rounded-full border translate-y-[1px] outline-none
         focus-visible:ring-white focus-visible:ring-opacity-65
-        focus-visible:ring border-opacity-55
+        focus-visible:ring border-opacity-20
         border-evergreen-meadow mx-auto bg-shadowy-forest transition-all">
         <MdArrowLeft className="text-turquoise-tide text-3xl scale-125"/>
         <span className="sr-only">Previous option</span>
       </animated.button>
 
-      <animated.div style={pillContainer} className="w-[160px] py-1 border border-evergreen-meadow mx-auto bg-shadowy-forest rounded-[52px] overflow-x-hidden">
+      <animated.div style={pillContainer} className="w-[160px] py-1 border border-opacity-20 border-evergreen-meadow mx-auto bg-shadowy-forest rounded-[52px] overflow-x-hidden">
         <animated.div
           style={pillProps}
           className="select-none mx-auto text-base font-bold text-turquoise-tide flex items-center justify-center gap-x-14"
@@ -236,7 +236,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       style={swipeButtonProps}
       disabled={isActive}
       className="rounded-full border translate-y-[1px]
-        border-opacity-55 border-evergreen-meadow mx-auto bg-shadowy-forest
+        border-opacity-20 border-evergreen-meadow mx-auto bg-shadowy-forest
         flex items-center justify-center
         outline-none focus-visible:ring-white focus-visible:ring-opacity-65
         focus-visible:ring transition-all">
@@ -249,7 +249,7 @@ const ActionBtnGroup:FC<ActionBtnGroupProps> = ({
       <animated.button
       onClick={pauseTimer}
       style={pauseBtnProps}
-      className="bg-shadowy-forest border border-evergreen-meadow rounded-full absolute text-sm p-4 text-turquoise-tide">
+      className="bg-shadowy-forest border border-opacity-20 border-evergreen-meadow rounded-full absolute text-sm p-4 text-turquoise-tide">
         <FaPause/>
       </animated.button>}
     </section>
