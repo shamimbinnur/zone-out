@@ -21,7 +21,7 @@ const VolumePopover: FC <VolumePopoverProps> = ({
           ref={triggerRef}
           aria-label="Volume Control"
           title={"Volume: " +(volume*100).toFixed() + " %"}
-          className="ml-2 text-xl text-moonlit-silver text-full"
+          className="ml-2 text-base text-moonlit-silver text-full"
         >
           { volume === 0 ? <FaVolumeXmark /> : <FaVolumeHigh /> }
         </button>

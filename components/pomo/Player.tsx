@@ -74,17 +74,17 @@ const Player:FC <PlayerProps> = ({
 
   return (
     <div
-      className="relative bg-black w-fit px-6 py-2 rounded-full flex justify-center items-center gap-2"
+      className="relative bg-black w-fit h-fit px-3 py-2 rounded-full flex justify-center items-center gap-2"
     >
       <button
         title={'Previous Track: '+audios[audioIndex === 0 ? audios.length - 1 : audioIndex - 1].title}
-        className="text-moonlit-silver text-xl"
+        className="text-moonlit-silver text-base"
         onClick={handlePrevious}>
           <FaBackwardStep />
       </button>
       <button
         title={(isPlaying ? "Pause" : "Play") +  ": "+title}
-        className="text-moonlit-silver text-xl"
+        className="text-moonlit-silver text-base"
         onClick={togglePlay}>
         {isPlaying
         ? <FaCirclePause />
@@ -92,10 +92,12 @@ const Player:FC <PlayerProps> = ({
       </button>
       <button
         title={'Next Track: '+audios[(audioIndex + 1) % audios.length].title}
-        className="text-moonlit-silver text-xl"
+        className="text-moonlit-silver text-base"
         onClick={handleNext}>
           <FaForwardStep />
       </button>
+
+      <span className="bg-moonlit-silver w-[1px] h-4"></span>
 
       <VolumePopover volume={volume} setVolume={setVolume} />
     </div>

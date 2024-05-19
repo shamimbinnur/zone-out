@@ -40,8 +40,8 @@ const Quotes:FC <QuoteProps> = ({
   }, [quoteIndex])
 
   return (
-    <div className="h-[60px] flex items-center justify-center max-w-52 sm:max-w-max sm:pr-4">
-      <p className="text-moonlit-silver text-center leading-tight text-sm sm:text-md md:text-lg font-archivo ">
+    <div className="flex min-h-[32px] items-center justify-center sm:px-4 sm:max-w-max">
+      <p className="text-moonlit-silver text-center leading-tight text-sm sm:text-base font-archivo ">
         {quotes[quoteIndex].text}
       </p>
     </div>
