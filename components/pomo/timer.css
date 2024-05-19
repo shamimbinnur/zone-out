@@ -1,0 +1,9 @@
+.timerMinHeight {
+  min-height: calc(100dvh - 122px);
+}
+
+@media screen and (min-width: 640px) {
+  .timerMinHeight {
+    min-height: calc(100vh - 60px);
+  }
+}

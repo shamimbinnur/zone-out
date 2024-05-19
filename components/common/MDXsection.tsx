@@ -13,6 +13,7 @@ const MDXsection:FC<MDXsectionProps> = ({
   return (
     <div className="bg-stone-50 text-shadowy-forest font-inter">
       <section
+        id="content"
         className="
         text-stone-950
           mx-auto max-w-5xl px-8 md:px-4 pt-16 sm:pt-32 pb-14 prose

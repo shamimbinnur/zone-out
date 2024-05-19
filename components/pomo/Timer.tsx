@@ -1,14 +1,18 @@
 "use client"
 
-import useTimer, { Status } from '@/hooks/useTimer'
-import { useSpring } from '@react-spring/web'
+import './timer.css'
+
 import { useEffect, useState } from 'react'
-import { animated } from '@react-spring/web'
+import { animated, useSpring } from '@react-spring/web'
+
+import { makeSound } from '@/utils/audio'
+import useTimer, { Status } from '@/hooks/useTimer'
+
 import ActionBtnGroup from './ActionBtnGroup'
 import DocTitle from '../common/DocTitle'
-import UtilityBtn from './UtilityBtn'
 import Progressbar from './Progressbar'
-import { makeSound } from '@/utils/audio'
+import UtilityBtn from './UtilityBtn'
+
 
 const Timer = () => {
   const {
@@ -28,8 +32,9 @@ const Timer = () => {
     toggleShortBreak,
     toggleLongBreak,
   } = useTimer()
-
+  
   const [isVisible, setIsVisible] = useState(false)
+
   const timerMode = status === Status.POMO ? "Pomodoro" : status === Status.SHORT ? "Break" : "Break"
 
   const commonButtonProps = useSpring({
@@ -54,6 +59,7 @@ const Timer = () => {
   const handleButtonText = () => {  
     return isActive ? "Pause" : (isPromoComplete ? "Restart" : "Start");
   }
+  
 
   useEffect(() => {
     setIsVisible(!isActive);
@@ -105,10 +111,11 @@ const Timer = () => {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [min])
 
+
   return (
     <>
       <DocTitle documentTitle={`${min} : ${secs}` } />
-      <section className="min-h-screen px-8 flex flex-col justify-center gap-y-20 items-center">
+      <section className="timerMinHeight h-[calc(100vh - 60rem)] px-8 flex flex-col justify-center gap-y-20 items-center">
         <animated.div style={commonButtonProps}>
           <Progressbar completed={pomoCount} />
         </animated.div>
