@@ -42,7 +42,7 @@ const Quotes:FC <QuoteProps> = ({
   return (
     <div className="flex min-h-[32px] items-center justify-center sm:px-4 sm:max-w-max">
       <p className="text-moonlit-silver text-center leading-tight text-sm sm:text-base font-archivo ">
-        {quotes[quoteIndex].text}
+        {quotes[quoteIndex].text} - {quotes[quoteIndex].author}
       </p>
     </div>
   )
