@@ -28,7 +28,7 @@ const DeskTopMenu = () => {
 
 const MobileMenu = () => {
   return (
-    <div className="flex sm:hidden flex-col items-center gap-y-8">
+    <div className="flex sm:hidden flex-col items-center px-4 _410:px-0 gap-y-8">
       <div className="flex w-full justify-between">
         <FooterNav />
         <Player audios={bgAudios} />
