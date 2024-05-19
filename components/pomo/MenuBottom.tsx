@@ -6,7 +6,7 @@ import Quotes from "./Quotes"
 
 const MenuBottom = () => {
   return (
-    <div className="h-[60px] py-2 px-10 flex justify-between items-center">
+    <div className="h-[122px] sm:h-[60px] overflow-hidden px-10 flex flex-col sm:flex-row sm:justify-between gap-y-4 justify-center items-center">
       <Quotes quotes={quotes} />
       <Player audios={bgAudios} />
     </div>

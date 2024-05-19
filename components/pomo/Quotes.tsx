@@ -35,13 +35,13 @@ const Quotes:FC <QuoteProps> = ({
     const interval = setInterval(() => {
       const index = getRandomQuoteIndex()
       setQuoteIndex(index)
-    }, 15000)
+    }, 60000)
     return () => clearInterval(interval)
   }, [quoteIndex])
 
   return (
-    <div>
-      <p className="text-moonlit-silver tracking-tight text-lg font-archivo ">
+    <div className="h-[60px] flex items-center justify-center max-w-52 sm:max-w-max sm:pr-4">
+      <p className="text-moonlit-silver text-center leading-tight text-sm sm:text-md md:text-lg font-archivo ">
         {quotes[quoteIndex].text}
       </p>
     </div>

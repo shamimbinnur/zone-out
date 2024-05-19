@@ -20,9 +20,10 @@ const Player:FC <PlayerProps> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [title, setTitle] = useState(audios[0].title);
 
+  // Load new audio and play when audioIndex changes
   useEffect(() => {    
     if (audio instanceof Howl) {
-      audio.stop();
+      audio.pause();
     }
 
     const sound = new Howl({
@@ -41,7 +42,19 @@ const Player:FC <PlayerProps> = ({
       sound.unload();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [audioIndex, isPlaying]);
+  }, [audioIndex]);
+
+  // Play or pause audio when isPlaying changes
+  useEffect(() => {
+    if (audio instanceof Howl) {
+      if (isPlaying) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaying]);
 
   useEffect(() => {
     Howler.volume(volume);
