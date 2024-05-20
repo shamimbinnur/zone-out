@@ -4,7 +4,7 @@ import Link from "next/link"
 const Pomo = () => {
   return (
     <section className="w-full py-14 lg:py-24 mx-auto max-w-5xl flex flex-col gap-y-8 text-shadowy-forest justify-between">
-      <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight">Earliest tool: <span className="text-turquoise-tide">Pomodoro Timer</span> lately?</h1>
+      <h1 className="text-2xl lg:text-3xl font-semibold tracking-tight">Earliest tool: <span className="text-turquoise-tide">Online Pomodoro Timer</span></h1>
       
       <p className="text-md lg:text-lg tracking-tight">
         The online Pomodoro timer is the earliest tool by ZoneOut. Designed to provide a smooth user experience and minimize distractions, it includes a quotes section to keep you motivated and options to play soothing background music (e.g., birds chirping, fire crackling, water flowing).
