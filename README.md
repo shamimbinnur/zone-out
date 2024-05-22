@@ -10,6 +10,8 @@ Elevate your productivity with our comprehensive suite of tools. Designed to fos
 ## Our Earliest Tool: Online Pomodoro Timer
 The online Pomodoro timer is the earliest tool by ZoneOut. Designed to provide a smooth user experience and minimize distractions, it includes a quotes section to keep you motivated and options to play soothing background music (e.g., birds chirping, fire crackling, water flowing).
 
+Click [here](https://zoneout.me/pomo) to try it out.
+
 **Key Points**
 - The online Pomodoro timer is the earliest tool by ZoneOut.
 - Designed to provide a smooth user experience and minimize distractions.
