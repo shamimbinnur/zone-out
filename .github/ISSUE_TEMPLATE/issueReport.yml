@@ -1,0 +1,33 @@
+issue_title: "Title of the Issue"
+
+issue_description: |
+  Description of the issue goes here. Provide as much detail as possible including steps to reproduce, expected behavior, and actual behavior.
+
+  - Step 1: 
+  - Step 2:
+  - Step 3:
+
+  Expected behavior: [Describe what you expected to happen]
+
+  Actual behavior: [Describe what actually happened]
+
+  Screenshots or error messages: [If applicable, include screenshots or error messages]
+
+priority: "High/Medium/Low"
+severity: "Critical/Major/Minor"
+
+affected_version: "Version number where the issue was found"
+
+assigned_to: "Person responsible for resolving the issue"
+
+deadline: "Date by which the issue needs to be resolved"
+
+labels:
+  - "Bug"
+  - "Feature Request"
+  - "Enhancement"
+  - "Documentation"
+  - "Help Wanted"
+  - "Good First Issue"
+  # Add more labels as needed
+
