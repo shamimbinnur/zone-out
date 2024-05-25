@@ -43,10 +43,14 @@ Ensure you have Node.js version 18 or higher installed on your local machine. Yo
 
 ## Contributing
 
-We welcome contributions! Please see our CONTRIBUTING.md for guidelines on how to contribute.
+We welcome contributions! Please see our [CONTRIBUTING.md](https://github.com/shamimbinnur/zone-out/CONTRIBUTING.md) for guidelines on how to contribute.
 
 ## Community and Support
 - Submit an Issue: If you encounter any issues, please report them [here](https://github.com/shamimbinnur/zone-out/issues).
+
+## Code of Conduct
+
+Please review our [Code of Conduct](https://github.com/shamimbinnur/zone-out/CODE_OF_CONDUCT.md) before contributing to ensure a positive environment.
 
 ## License
 This project is licensed under the MIT License - see the [License](https://github.com/shamimbinnur/zone-out/blob/main/LICENSE) file for details.
