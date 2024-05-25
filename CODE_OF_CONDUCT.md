@@ -1,4 +1,4 @@
-# Code of Conduct - zone-out
+# Code of Conduct - ZoneOut
 
 ## Our Pledge
 
