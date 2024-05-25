@@ -43,7 +43,7 @@ Ensure you have Node.js version 18 or higher installed on your local machine. Yo
 
 ## Contributing
 
-We welcome contributions! Please see our [CONTRIBUTING.md](https://github.com/shamimbinnur/zone-out/CONTRIBUTING.md) for guidelines on how to contribute.
+We welcome contributions! Please see our [CONTRIBUTING.md](https://github.com/shamimbinnur/zone-out/blob/main/CONTRIBUTING.md) for guidelines on how to contribute.
 
 ## Community and Support
 - Submit an Issue: If you encounter any issues, please report them [here](https://github.com/shamimbinnur/zone-out/issues).
