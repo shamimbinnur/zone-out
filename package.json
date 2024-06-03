@@ -28,6 +28,7 @@
     "next-mdx-remote": "^4.4.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-github-btn": "^1.4.0",
     "react-icons": "^5.0.1",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0"
