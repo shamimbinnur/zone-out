@@ -27,7 +27,7 @@ const InfoPopover = () => {
       <Popover.Trigger asChild>
         <button
           ref={triggerRef}
-          className="hidden lg:inline-flex rounded-lg p-1.5 items-center text-moonlit-silver border border-moonlit-silver border-opacity-980 justify-center bg-shadowy-forest cursor-cursor outline-none"
+          className="hidden lg:inline-flex rounded-md p-1.5 items-center text-xs text-moonlit-silver border border-moonlit-silver border-opacity-980 justify-center bg-shadowy-forest cursor-cursor outline-none"
           aria-label="Shortcuts info"
         >
           <MdKeyboardCommandKey />
