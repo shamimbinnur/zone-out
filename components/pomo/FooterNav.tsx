@@ -2,6 +2,7 @@ import Link from "next/link"
 import {JSX} from "react"
 import { HiHome } from "react-icons/hi"
 import ScrollDownLink from "./ScrollDownLink"
+import { Suspense } from 'react'
 
 const FooterNav = () => {
   type NavType = {
@@ -32,7 +33,9 @@ const FooterNav = () => {
           </li>
         ))}
 
-        <ScrollDownLink/>
+        <Suspense>
+          <ScrollDownLink/>
+        </Suspense>
       </ul>
     </nav>
   )
