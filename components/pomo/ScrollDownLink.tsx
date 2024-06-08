@@ -10,7 +10,7 @@ const ScrollDownLink = () => {
   
   useEffect(() => {
     requiredContent ? handleInfoClick() : null
-  }, [requiredContent])
+  }, [])
   
   const handleInfoClick = () => {
     if (typeof window === "undefined") return
