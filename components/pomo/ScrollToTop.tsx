@@ -35,7 +35,7 @@ const ScrollToTop = () => {
       duration-300 ease-in-out z-50
       bg-red-600 px-3 py-1 rounded-xl
       font-semibold text-white
-      ${isScrolledDown ? "opacity-100" : "opacity-0"}`
+      ${isScrolledDown ? "opacity-100" : "opacity-0 hidden"}`
       }
     > 
       <LuAlarmClock size={18} />
