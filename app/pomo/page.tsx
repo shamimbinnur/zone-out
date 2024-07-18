@@ -5,7 +5,6 @@ import MDXsection from '@/components/common/MDXsection';
 import Menu from '@/components/pomo/Menu';
 import MenuBottom from '@/components/pomo/MenuBottom';
 import ScrollToTop from '@/components/pomo/ScrollToTop';
-import { Suspense } from 'react';
 
 const Page = () => {
   const { content, meta } = getPageContent('pomodoro.mdx');
@@ -16,9 +15,7 @@ const Page = () => {
         <Menu />
         <Timer />
         <MenuBottom />
-        <Suspense>
-          <ScrollToTop />
-        </Suspense>
+        <ScrollToTop />
       </Background>
       <MDXsection meta={meta} content={content} />
     </main>
