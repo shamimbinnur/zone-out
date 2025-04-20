@@ -1,24 +1,23 @@
-import Link from "next/link"
-import {JSX, Suspense} from "react"
-import { HiHome } from "react-icons/hi"
-import ScrollDownLink from "./ScrollDownLink"
-import { Suspense } from 'react'
+import Link from "next/link";
+import { JSX, Suspense } from "react";
+import { HiHome } from "react-icons/hi";
+import ScrollDownLink from "./ScrollDownLink";
 
 const FooterNav = () => {
   type NavType = {
-    href: string
-    label?: string
-    icon?: JSX.Element
-  }
-  type NavsType = NavType[]
+    href: string;
+    label?: string;
+    icon?: JSX.Element;
+  };
+  type NavsType = NavType[];
 
   const links: NavsType = [
     {
       href: "/",
       label: "Home",
-      icon: <HiHome />
+      icon: <HiHome />,
     },
-  ]
+  ];
 
   return (
     <nav className="w-fit h-fit bg-shadowy-forest bg-opacity-80 rounded-lg py-1 px-2">
@@ -34,11 +33,11 @@ const FooterNav = () => {
         ))}
 
         <Suspense>
-          <ScrollDownLink/>
+          <ScrollDownLink />
         </Suspense>
       </ul>
     </nav>
-  )
-}
+  );
+};
 
-export default FooterNav
+export default FooterNav;

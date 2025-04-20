@@ -1,13 +1,23 @@
-import Header from "@/components/landing-page/Header";
-import Hero from "@/components/landing-page/Hero";
-import Pomo from "@/components/landing-page/Pomo";
+import MDXsection from "@/components/common/MDXsection";
+import Background from "@/components/pomo/Background";
+import Menu from "@/components/pomo/Menu";
+import MenuBottom from "@/components/pomo/MenuBottom";
+import ScrollToTop from "@/components/pomo/ScrollToTop";
+import Timer from "@/components/pomo/Timer";
+import { getPageContent } from "@/utils/mdx";
 
-export default function Home() {  
+export default function Home() {
+  const { content, meta } = getPageContent("pomodoro.mdx");
+
   return (
-    <main className="h-fit w-full px-8 bg-[#f5f5f5]">
-      <Header />
-      <Hero />
-      <Pomo />
+    <main>
+      <Background>
+        <Menu />
+        <Timer />
+        <MenuBottom />
+        <ScrollToTop />
+      </Background>
+      <MDXsection meta={meta} content={content} />
     </main>
   );
 }
