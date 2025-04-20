@@ -1,20 +1,28 @@
-import { bgAudios } from "@/data/pomo/bgAudio"
-import { quotes } from "@/data/pomo/quote"
+"use client";
 
-import Player from "./Player"
-import Quotes from "./Quotes"
-import FooterNav from "./FooterNav"
+import { motion } from "framer-motion";
+import { bgAudios } from "@/data/pomo/bgAudio";
+import { quotes } from "@/data/pomo/quote";
+
+import Player from "./Player";
+import Quotes from "./Quotes";
+import FooterNav from "./FooterNav";
 
 const MenuBottom = () => {
   return (
-    <div className="h-[122px] sm:h-[60px] mx-auto max-w-[378px] sm:max-w-full sm:px-10">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.3, duration: 0.5 }}
+      className="h-[122px] sm:h-[60px] mx-auto max-w-[378px] sm:max-w-full sm:px-10"
+    >
       <DeskTopMenu />
       <MobileMenu />
-    </div>
-  )
-}
+    </motion.div>
+  );
+};
 
-export default MenuBottom
+export default MenuBottom;
 
 const DeskTopMenu = () => {
   return (
@@ -23,8 +31,8 @@ const DeskTopMenu = () => {
       <Quotes quotes={quotes} />
       <Player audios={bgAudios} />
     </div>
-  )
-}
+  );
+};
 
 const MobileMenu = () => {
   return (
@@ -33,8 +41,8 @@ const MobileMenu = () => {
         <FooterNav />
         <Player audios={bgAudios} />
       </div>
-      
+
       <Quotes quotes={quotes} />
     </div>
-  )
-}
+  );
+};

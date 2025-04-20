@@ -7,9 +7,7 @@ import ScrollToTop from "@/components/pomo/ScrollToTop";
 import Timer from "@/components/pomo/Timer";
 import { getPageContent } from "@/utils/mdx";
 import { preloadSounds } from "@/utils/audio";
-
-// Metadata can be moved to layout.tsx or a separate metadata.ts file
-// for better organization
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export default function PomodoroPage() {
   // Get MDX content for the information section
@@ -21,28 +19,30 @@ export default function PomodoroPage() {
   }
 
   return (
-    <main>
-      {/* Timer Application Section */}
-      <Background>
-        {/* Top Navigation */}
-        <Menu />
+    <ThemeProvider>
+      <main>
+        {/* Timer Application Section */}
+        <Background>
+          {/* Top Navigation */}
+          <Menu />
 
-        {/* Main Timer Interface */}
-        <Timer />
+          {/* Main Timer Interface */}
+          <Timer />
 
-        {/* Bottom Navigation with Audio Controls and Quotes */}
-        <Suspense fallback={<div className="h-[60px]"></div>}>
-          <MenuBottom />
+          {/* Bottom Navigation with Audio Controls and Quotes */}
+          <Suspense fallback={<div className="h-[60px]"></div>}>
+            <MenuBottom />
+          </Suspense>
+
+          {/* Floating Button to Return to Top */}
+          <ScrollToTop />
+        </Background>
+
+        {/* Information Section with Pomodoro Technique Description */}
+        <Suspense fallback={<div className="h-[200px] bg-stone-50"></div>}>
+          <MDXsection meta={meta} content={content} />
         </Suspense>
-
-        {/* Floating Button to Return to Top */}
-        <ScrollToTop />
-      </Background>
-
-      {/* Information Section with Pomodoro Technique Description */}
-      <Suspense fallback={<div className="h-[200px] bg-stone-50"></div>}>
-        <MDXsection meta={meta} content={content} />
-      </Suspense>
-    </main>
+      </main>
+    </ThemeProvider>
   );
 }

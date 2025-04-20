@@ -1,5 +1,7 @@
 import { FC, useCallback } from "react";
+import { motion } from "framer-motion";
 import * as Slider from "@radix-ui/react-slider";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface RangeSliderProps {
   volume: number;
@@ -7,6 +9,8 @@ interface RangeSliderProps {
 }
 
 const RangeSlider: FC<RangeSliderProps> = ({ volume, setVolume }) => {
+  const { theme } = useTheme();
+
   // Format volume as percentage for accessibility
   const volumePercentage = Math.round(volume * 100);
 
@@ -33,13 +37,19 @@ const RangeSlider: FC<RangeSliderProps> = ({ volume, setVolume }) => {
         aria-label="Volume Control"
         aria-valuetext={`${volumePercentage}%`}
       >
-        <Slider.Track className="bg-moonlit-silver relative grow rounded-full h-[3px]">
-          <Slider.Range className="absolute bg-turquoise-tide rounded-full h-full" />
+        <Slider.Track
+          className={`${theme.textSecondary} bg-opacity-50 relative grow rounded-full h-[3px]`}
+        >
+          <Slider.Range
+            className={`absolute ${theme.accent1} rounded-full h-full`}
+          />
         </Slider.Track>
-        <Slider.Thumb
-          className="block w-4 h-4 bg-turquoise-tide shadow-[0_2px_10px] shadow-black/20 rounded-[10px] hover:bg-turquoise-tide/90 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-turquoise-tide/30 transition-colors"
-          aria-label={`Volume: ${volumePercentage}%`}
-        />
+        <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+          <Slider.Thumb
+            className={`block w-4 h-4 ${theme.accent1} shadow-[0_2px_10px] shadow-black/20 rounded-[10px] hover:bg-opacity-90 focus:outline-none focus:shadow-[0_0_0_2px] focus:shadow-opacity-30 transition-colors`}
+            aria-label={`Volume: ${volumePercentage}%`}
+          />
+        </motion.div>
       </Slider.Root>
 
       {/* Visually hidden label for screen readers */}

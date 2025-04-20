@@ -1,10 +1,13 @@
-import { FC, useEffect, useState, useCallback } from "react";
-import { animated, useSpring } from "@react-spring/web";
+"use client";
+
+import { FC, useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
 import { FaPause, FaWalking } from "react-icons/fa";
 import { BsStars } from "react-icons/bs";
 import { CiCoffeeCup } from "react-icons/ci";
 import { Status } from "@/hooks/useTimer";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export enum ButtonPosition {
   LEFT = -1,
@@ -36,109 +39,81 @@ const ActionBtnGroup: FC<ActionBtnGroupProps> = ({
   shortCount,
   longCount,
 }) => {
+  const { theme } = useTheme();
   const [buttonPosition, setButtonPosition] = useState<ButtonPosition>(
     ButtonPosition.MIDDLE
   );
-  const [pillProps, api] = useSpring(() => ({ x: 0, scale: 1 }), []);
+  const [xPosition, setXPosition] = useState(0);
 
-  // Animation for swipe buttons (left/right arrows)
-  const swipeButtonProps = useSpring({
-    config: { duration: 100 },
-    from: { opacity: 0 },
-    to: { opacity: isActive ? 0 : 1 },
-  });
+  // Define animation variants
+  const pillVariants = {
+    active: {
+      scaleX: 0.2,
+      scaleY: 0.8,
+      opacity: 0,
+      transition: { duration: 0.3 },
+    },
+    inactive: {
+      scaleX: 1,
+      scaleY: 1,
+      opacity: 1,
+      transition: { duration: 0.3 },
+    },
+  };
 
-  // Animation for pill container
-  const [pillContainer, pillContainerApi] = useSpring(() => ({}));
+  const pauseButtonVariants = {
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.2 },
+    },
+    hidden: {
+      scale: 0,
+      opacity: 0,
+      transition: { duration: 0.2 },
+    },
+  };
 
-  // Animation for pause button
-  const [pauseBtnProps, pauseBtnPropsApi] = useSpring(() => ({}));
-
-  // Update pill container animation when timer state changes
-  useEffect(() => {
-    pillContainerApi.start({
-      config: {
-        duration: 100,
-      },
-      to: {
-        scaleX: isActive ? 0.2 : 1,
-        scaleY: isActive ? 0.8 : 1,
-        opacity: isActive ? 0 : 1,
-      },
-    });
-  }, [isActive, pillContainerApi]);
-
-  // Update pause button animation when timer state changes
-  useEffect(() => {
-    pauseBtnPropsApi.start({
-      config: {
-        duration: 100,
-      },
-      to: {
-        scaleX: isActive ? 1 : 1.5,
-        scaleY: isActive ? 1 : 0.9,
-        opacity: isActive ? 1 : 0,
-      },
-    });
-  }, [isActive, pauseBtnPropsApi]);
+  const arrowButtonVariants = {
+    visible: { opacity: 1, transition: { duration: 0.2 } },
+    hidden: { opacity: 0, transition: { duration: 0.2 } },
+  };
 
   // Handle left button click (long break)
   const handleLeftButtonClick = useCallback(() => {
-    // If button is in the middle, move it to the left
     if (buttonPosition === ButtonPosition.MIDDLE) {
-      api.start({ x: 155 });
+      setXPosition(155);
       setButtonPosition(ButtonPosition.LEFT);
-    }
-    // If button is on the left, shake it to indicate it's already selected
-    else if (buttonPosition === ButtonPosition.LEFT) {
-      api.start({
-        config: { tension: 180, friction: 8 },
-        from: { x: 150 },
-        to: { x: 155 },
-      });
-    }
-    // If button is on the right, move it to the middle
-    else if (buttonPosition === ButtonPosition.RIGHT) {
-      api.start({
-        x: 0,
-        config: { tension: 170, friction: 26 },
-      });
+    } else if (buttonPosition === ButtonPosition.LEFT) {
+      // Visual feedback for already selected button
+      setXPosition((prev) => prev - 5);
+      setTimeout(() => setXPosition(155), 200);
+    } else if (buttonPosition === ButtonPosition.RIGHT) {
+      setXPosition(0);
       setButtonPosition(ButtonPosition.MIDDLE);
     }
-  }, [buttonPosition, api]);
+  }, [buttonPosition]);
 
   // Handle right button click (short break)
   const handleRightButtonClick = useCallback(() => {
-    // If button is in the middle, move it to the right
     if (buttonPosition === ButtonPosition.MIDDLE) {
-      api.start({ x: -155 });
+      setXPosition(-155);
       setButtonPosition(ButtonPosition.RIGHT);
-    }
-    // If button is on the right, shake it to indicate it's already selected
-    else if (buttonPosition === ButtonPosition.RIGHT) {
-      api.start({
-        config: { tension: 180, friction: 8 },
-        from: { x: -150 },
-        to: { x: -155 },
-      });
-    }
-    // If button is on the left, move it to the middle
-    else if (buttonPosition === ButtonPosition.LEFT) {
-      api.start({
-        x: 0,
-        config: { tension: 170, friction: 26 },
-      });
+    } else if (buttonPosition === ButtonPosition.RIGHT) {
+      // Visual feedback for already selected button
+      setXPosition((prev) => prev + 5);
+      setTimeout(() => setXPosition(-155), 200);
+    } else if (buttonPosition === ButtonPosition.LEFT) {
+      setXPosition(0);
       setButtonPosition(ButtonPosition.MIDDLE);
     }
-  }, [buttonPosition, api]);
+  }, [buttonPosition]);
 
   // Move button to short break position when a pomodoro is completed
   useEffect(() => {
     if (pomoCount > 0 && pomoCount < 4) {
-      // After completing a pomodoro, make the 'short break' button more accessible
       handleRightButtonClick();
     } else if (pomoCount === 4) {
-      // After 4 pomodoros, make the 'long break' button more accessible
       handleLeftButtonClick();
     }
   }, [pomoCount, handleRightButtonClick, handleLeftButtonClick]);
@@ -192,93 +167,139 @@ const ActionBtnGroup: FC<ActionBtnGroupProps> = ({
   return (
     <section className="flex font-archivo relative justify-center items-center gap-x-8">
       {/* Left Arrow Button */}
-      <animated.button
-        style={swipeButtonProps}
+      <motion.button
+        variants={arrowButtonVariants}
+        animate={isActive ? "hidden" : "visible"}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         onClick={handleLeftButtonClick}
         disabled={isActive}
-        className="rounded-full border translate-y-[1px] outline-none
+        className={`rounded-full border translate-y-[1px] outline-none
           focus-visible:ring-white focus-visible:ring-opacity-65
           focus-visible:ring border-opacity-20
-          border-evergreen-meadow mx-auto bg-shadowy-forest transition-all"
+          ${theme.border} mx-auto ${theme.buttonBg} transition-colors duration-300`}
       >
-        <MdArrowLeft className="text-turquoise-tide text-3xl scale-125" />
+        <MdArrowLeft className={`${theme.textSecondary} text-3xl scale-125`} />
         <span className="sr-only">Previous option</span>
-      </animated.button>
+      </motion.button>
 
       {/* Pill Container with Timer Options */}
-      <animated.div
-        style={pillContainer}
-        className="w-[160px] py-1 border border-opacity-20 border-evergreen-meadow mx-auto bg-shadowy-forest rounded-[52px] overflow-x-hidden"
+      <motion.div
+        variants={pillVariants}
+        animate={isActive ? "active" : "inactive"}
+        className={`w-[160px] py-1 border border-opacity-20 ${theme.border} mx-auto ${theme.buttonBg} rounded-[52px] overflow-x-hidden transition-colors duration-300`}
       >
-        <animated.div
-          style={pillProps}
-          className="select-none mx-auto text-base font-bold text-turquoise-tide flex items-center justify-center gap-x-14"
+        <motion.div
+          animate={{ x: xPosition }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className="select-none mx-auto text-base font-bold flex items-center justify-center gap-x-14"
         >
           {/* Long Break Button */}
-          <button
+          <motion.button
+            whileHover={
+              buttonPosition === ButtonPosition.LEFT ? { scale: 1.05 } : {}
+            }
+            whileTap={
+              buttonPosition === ButtonPosition.LEFT ? { scale: 0.95 } : {}
+            }
             disabled={buttonPosition !== ButtonPosition.LEFT}
-            className="text-nowrap flex
+            className={`text-nowrap flex ${
+              buttonPosition === ButtonPosition.LEFT
+                ? theme.textPrimary
+                : theme.textSecondary
+            }
               transform transition-all
               outline-none focus-visible:text-white
-              items-center gap-1"
+              items-center gap-1`}
             onClick={toggleLongBreak}
           >
             <FaWalking className="text-lg" />
             Long break
-          </button>
+          </motion.button>
 
           {/* Start/Pause Button */}
-          <animated.button
+          <motion.button
+            whileHover={
+              buttonPosition === ButtonPosition.MIDDLE ? { scale: 1.05 } : {}
+            }
+            whileTap={
+              buttonPosition === ButtonPosition.MIDDLE ? { scale: 0.95 } : {}
+            }
             disabled={buttonPosition !== ButtonPosition.MIDDLE || isActive}
             onClick={toggleTimer}
-            className="text-2xl flex items-center
+            className={`text-2xl flex items-center ${
+              buttonPosition === ButtonPosition.MIDDLE
+                ? theme.textPrimary
+                : theme.textSecondary
+            }
               transform transition-all outline-none
               focus-visible:text-white rounded-lg
-              justify-center gap-2"
+              justify-center gap-2`}
           >
             <BsStars className="text-xl" />
             Start
-          </animated.button>
+          </motion.button>
 
           {/* Short Break Button */}
-          <button
+          <motion.button
+            whileHover={
+              buttonPosition === ButtonPosition.RIGHT ? { scale: 1.05 } : {}
+            }
+            whileTap={
+              buttonPosition === ButtonPosition.RIGHT ? { scale: 0.95 } : {}
+            }
             disabled={buttonPosition !== ButtonPosition.RIGHT}
-            className="text-nowrap flex items-center
+            className={`text-nowrap flex items-center ${
+              buttonPosition === ButtonPosition.RIGHT
+                ? theme.textPrimary
+                : theme.textSecondary
+            }
               transform transition-all outline-none
-              focus-visible:text-white gap-1"
+              focus-visible:text-white gap-1`}
             onClick={toggleShortBreak}
           >
             <CiCoffeeCup className="text-lg" />
             Short break
-          </button>
-        </animated.div>
-      </animated.div>
+          </motion.button>
+        </motion.div>
+      </motion.div>
 
       {/* Right Arrow Button */}
-      <animated.button
+      <motion.button
+        variants={arrowButtonVariants}
+        animate={isActive ? "hidden" : "visible"}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         onClick={handleRightButtonClick}
-        style={swipeButtonProps}
         disabled={isActive}
-        className="rounded-full border translate-y-[1px]
-          border-opacity-20 border-evergreen-meadow mx-auto bg-shadowy-forest
+        className={`rounded-full border translate-y-[1px]
+          border-opacity-20 ${theme.border} mx-auto ${theme.buttonBg}
           flex items-center justify-center
           outline-none focus-visible:ring-white focus-visible:ring-opacity-65
-          focus-visible:ring transition-all"
+          focus-visible:ring transition-colors duration-300`}
       >
-        <MdArrowRight className="text-turquoise-tide text-3xl scale-125" />
+        <MdArrowRight className={`${theme.textSecondary} text-3xl scale-125`} />
         <span className="sr-only">Next option</span>
-      </animated.button>
+      </motion.button>
 
       {/* Pause Button */}
-      {isActive && (
-        <animated.button
-          onClick={pauseTimer}
-          style={pauseBtnProps}
-          className="bg-shadowy-forest border border-opacity-20 border-evergreen-meadow rounded-full absolute text-sm p-4 text-turquoise-tide"
-        >
-          <FaPause />
-        </animated.button>
-      )}
+      <AnimatePresence>
+        {isActive && (
+          <motion.button
+            key="pause-button"
+            variants={pauseButtonVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={pauseTimer}
+            className={`${theme.buttonBg} border border-opacity-20 ${theme.border} rounded-full absolute text-sm p-4 ${theme.textPrimary} transition-colors duration-300`}
+          >
+            <FaPause />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Howl, Howler } from "howler";
 import {
   FaBackwardStep,
@@ -11,17 +12,20 @@ import {
 
 import VolumePopover from "./VolumePopover";
 import { AudiosType } from "@/data/pomo/bgAudio";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface PlayerProps {
   audios: AudiosType;
 }
 
 const Player: FC<PlayerProps> = ({ audios }) => {
+  const { theme } = useTheme();
   const [audio, setAudio] = useState<Howl | null>(null);
   const [audioIndex, setAudioIndex] = useState(0);
   const [volume, setVolume] = useState(0.5);
   const [isPlaying, setIsPlaying] = useState(false);
   const [title, setTitle] = useState(audios[0].title);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Load new audio and play when audioIndex changes
   useEffect(() => {
@@ -63,6 +67,11 @@ const Player: FC<PlayerProps> = ({ audios }) => {
     Howler.volume(volume);
   }, [volume]);
 
+  // Animation effect on mount
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   // Toggle play/pause state
   const togglePlay = useCallback(() => {
     setIsPlaying((prev) => !prev);
@@ -91,43 +100,75 @@ const Player: FC<PlayerProps> = ({ audios }) => {
   };
 
   return (
-    <div className="relative bg-shadowy-forest bg-opacity-80 w-fit h-fit px-3 py-2 rounded-full flex justify-center items-center gap-2">
-      {/* Previous Track Button */}
-      <button
-        title={`Previous Track: ${getPreviousTrackTitle()}`}
-        className="text-moonlit-silver text-base"
-        onClick={handlePrevious}
-        aria-label="Previous track"
-      >
-        <FaBackwardStep />
-      </button>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          className={`relative ${theme.buttonBg} bg-opacity-80 backdrop-blur-sm w-fit h-fit px-3 py-2 rounded-full flex justify-center items-center gap-2 transition-colors duration-300`}
+        >
+          {/* Track Name Tooltip */}
+          <AnimatePresence>
+            {isPlaying && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: -30 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 px-3 py-1 rounded-full text-xs whitespace-nowrap"
+              >
+                <span className={theme.textPrimary}>{title}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-      {/* Play/Pause Button */}
-      <button
-        title={`${isPlaying ? "Pause" : "Play"}: ${title}`}
-        className="text-moonlit-silver text-base"
-        onClick={togglePlay}
-        aria-label={isPlaying ? "Pause" : "Play"}
-      >
-        {isPlaying ? <FaCirclePause /> : <FaCirclePlay />}
-      </button>
+          {/* Previous Track Button */}
+          <motion.button
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            title={`Previous Track: ${getPreviousTrackTitle()}`}
+            className={theme.textSecondary + " text-base"}
+            onClick={handlePrevious}
+            aria-label="Previous track"
+          >
+            <FaBackwardStep />
+          </motion.button>
 
-      {/* Next Track Button */}
-      <button
-        title={`Next Track: ${getNextTrackTitle()}`}
-        className="text-moonlit-silver text-base"
-        onClick={handleNext}
-        aria-label="Next track"
-      >
-        <FaForwardStep />
-      </button>
+          {/* Play/Pause Button */}
+          <motion.button
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            title={`${isPlaying ? "Pause" : "Play"}: ${title}`}
+            className={theme.textSecondary + " text-base"}
+            onClick={togglePlay}
+            aria-label={isPlaying ? "Pause" : "Play"}
+          >
+            {isPlaying ? <FaCirclePause /> : <FaCirclePlay />}
+          </motion.button>
 
-      {/* Divider */}
-      <span className="bg-moonlit-silver w-[1px] h-4" aria-hidden="true"></span>
+          {/* Next Track Button */}
+          <motion.button
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            title={`Next Track: ${getNextTrackTitle()}`}
+            className={theme.textSecondary + " text-base"}
+            onClick={handleNext}
+            aria-label="Next track"
+          >
+            <FaForwardStep />
+          </motion.button>
 
-      {/* Volume Control */}
-      <VolumePopover volume={volume} setVolume={setVolume} />
-    </div>
+          {/* Divider */}
+          <span
+            className={theme.accent1 + " w-[1px] h-4"}
+            aria-hidden="true"
+          ></span>
+
+          {/* Volume Control */}
+          <VolumePopover volume={volume} setVolume={setVolume} />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

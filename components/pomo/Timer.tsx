@@ -2,10 +2,11 @@
 
 import "./timer.css";
 import { useEffect, useState } from "react";
-import { animated, useSpring } from "@react-spring/web";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { makeSound } from "@/utils/audio";
 import useTimer, { Status } from "@/hooks/useTimer";
+import { useTheme } from "@/contexts/ThemeContext";
 
 import ActionBtnGroup from "./ActionBtnGroup";
 import DocTitle from "../common/DocTitle";
@@ -13,6 +14,7 @@ import Progressbar from "./Progressbar";
 import UtilityBtn from "./UtilityBtn";
 
 const Timer = () => {
+  const { theme } = useTheme();
   const {
     secs,
     min,
@@ -39,24 +41,6 @@ const Timer = () => {
       : status === Status.SHORT
       ? "Short Break"
       : "Long Break";
-
-  const commonButtonProps = useSpring({
-    opacity: isVisible ? 1 : 0,
-    transform: isVisible ? "translateY(0)" : "translateY(-40%)",
-    config: {
-      duration: 100,
-      transition: "ease-in",
-    },
-  });
-
-  const timerContainerAnimationProps = useSpring({
-    transform: isActive ? "translateY(0)" : "translateY(8%)",
-    config: {
-      duration: 100,
-      transition: "ease-in-out",
-    },
-    from: { transform: "translateY(0)" },
-  });
 
   const handleButtonText = () => {
     return isActive ? "Pause" : isPromoComplete ? "Restart" : "Start";
@@ -114,67 +98,99 @@ const Timer = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [increaseMinutes, decreaseMinutes, resetTimer]);
 
+  // Number animation variants
+  const numberVariants = {
+    inactive: {
+      y: 0,
+      transition: { duration: 0.3 },
+    },
+    active: {
+      y: "-8%",
+      transition: { duration: 0.3 },
+    },
+  };
+
   return (
     <>
       <DocTitle documentTitle={`${min}:${secs < 10 ? `0${secs}` : secs}`} />
       <section className="timerMinHeight px-8 flex flex-col justify-center gap-y-20 items-center">
-        <animated.div style={commonButtonProps}>
-          <Progressbar completed={pomoCount} />
-        </animated.div>
+        <AnimatePresence>
+          {isVisible && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Progressbar completed={pomoCount} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        <section className="max-w-[660px] scale-95 _410:scale-100 px-10 py-8 flex justify-center ring-1 bg-shadowy-forest ring-evergreen-meadow ring-opacity-10 rounded-3xl sm:rounded-[52px] relative">
+        <motion.section
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          className={`max-w-[660px] scale-95 _410:scale-100 px-10 py-8 flex justify-center ring-1 ${theme.timerBg} ${theme.border} ring-opacity-10 rounded-3xl sm:rounded-[52px] relative backdrop-blur-md shadow-lg transition-colors duration-300`}
+        >
           <div className="flex flex-col relative items-center">
             <UtilityBtn
-              resetBtnAnimationProps={commonButtonProps}
+              isVisible={isVisible}
               increaseMinutes={increaseMinutes}
               decreaseMinutes={decreaseMinutes}
               resetTimer={resetTimer}
             />
 
-            <animated.div
-              style={timerContainerAnimationProps}
+            <motion.div
+              variants={numberVariants}
+              animate={isActive ? "active" : "inactive"}
               className="flex gap-8 transition-all my-6 sm:my-4 leading-none select-none overflow-hidden justify-start items-center cursor-default"
             >
               <div>
-                <p className="sm:text-[182px] sm:w-56 text-[90px] font-semibold sm:font-medium text-white">
+                <motion.p
+                  className={`sm:text-[182px] sm:w-56 text-[90px] font-semibold sm:font-medium ${theme.textPrimary}`}
+                  key={`min-${min}`}
+                  initial={{ opacity: 0.7, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
                   {min < 10 ? `0${min}` : min}
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center gap-y-2">
-                {Array.from({ length: 3 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className={`${
-                      index % 2 === 0
-                        ? "bg-moonlit-silver"
-                        : "bg-turquoise-tide"
-                    } h-[25px] rounded-sm w-[4px]`}
-                  />
-                ))}
+                </motion.p>
               </div>
 
               <div>
-                <p className="sm:text-[182px] text-8xl sm:w-56 text-[90px] font-semibold sm:font-medium text-white">
+                <motion.p
+                  className={`sm:text-[182px] text-8xl sm:w-56 text-[90px] font-semibold sm:font-medium ${theme.textPrimary}`}
+                  key={`sec-${secs}`}
+                  initial={{ opacity: 0.7, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
                   {secs < 10 ? `0${secs}` : secs}
-                </p>
+                </motion.p>
               </div>
-            </animated.div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
-        <ActionBtnGroup
-          toggleShortBreak={toggleShortBreak}
-          toggleLongBreak={toggleLongBreak}
-          toggleTimer={toggleTimer}
-          handleButtonText={handleButtonText}
-          isActive={isActive}
-          pauseTimer={pauseTimer}
-          pomoCount={pomoCount}
-          shortCount={shortCount}
-          longCount={longCount}
-          status={status}
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <ActionBtnGroup
+            toggleShortBreak={toggleShortBreak}
+            toggleLongBreak={toggleLongBreak}
+            toggleTimer={toggleTimer}
+            handleButtonText={handleButtonText}
+            isActive={isActive}
+            pauseTimer={pauseTimer}
+            pomoCount={pomoCount}
+            shortCount={shortCount}
+            longCount={longCount}
+            status={status}
+          />
+        </motion.div>
       </section>
     </>
   );

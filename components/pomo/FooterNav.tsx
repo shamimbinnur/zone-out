@@ -1,9 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import { JSX, Suspense } from "react";
 import { HiHome } from "react-icons/hi";
+import { motion } from "framer-motion";
 import ScrollDownLink from "./ScrollDownLink";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const FooterNav = () => {
+  const { theme } = useTheme();
+
   type NavType = {
     href: string;
     label?: string;
@@ -20,14 +26,22 @@ const FooterNav = () => {
   ];
 
   return (
-    <nav className="w-fit h-fit bg-shadowy-forest bg-opacity-80 rounded-lg py-1 px-2">
-      <ul className="flex items-center gap-x-2 text-base text-moonlit-silver">
+    <motion.nav
+      whileHover={{ scale: 1.05 }}
+      className={`w-fit h-fit ${theme.buttonBg} bg-opacity-80 rounded-lg py-1 px-2 backdrop-blur-sm transition-colors duration-300`}
+    >
+      <ul
+        className={`flex items-center gap-x-2 text-base ${theme.textSecondary}`}
+      >
         {links.map(({ href, label, icon }) => (
           <li key={label}>
-            <Link href={href} className="flex items-center gap-2">
+            <Link
+              href={href}
+              className="flex items-center gap-2 hover:text-white transition-colors"
+            >
               {icon && icon}
               {label && label}
-              <span className="text-moonlit-silver">|</span>
+              <span className={theme.textSecondary}>|</span>
             </Link>
           </li>
         ))}
@@ -36,7 +50,7 @@ const FooterNav = () => {
           <ScrollDownLink />
         </Suspense>
       </ul>
-    </nav>
+    </motion.nav>
   );
 };
 

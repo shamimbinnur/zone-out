@@ -1,5 +1,6 @@
 import * as Popover from "@radix-ui/react-popover";
 import { FC, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
 import {
   FaVolumeHigh,
   FaVolumeLow,
@@ -7,6 +8,7 @@ import {
   FaVolumeXmark,
 } from "react-icons/fa6";
 import RangeSlider from "./RangeSlider";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface VolumePopoverProps {
   volume: number;
@@ -14,6 +16,7 @@ interface VolumePopoverProps {
 }
 
 const VolumePopover: FC<VolumePopoverProps> = ({ volume, setVolume }) => {
+  const { theme } = useTheme();
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   // Format volume as percentage
@@ -35,26 +38,28 @@ const VolumePopover: FC<VolumePopoverProps> = ({ volume, setVolume }) => {
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
-        <button
+        <motion.button
           ref={triggerRef}
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
           aria-label={volume === 0 ? "Unmute" : "Volume Control"}
           title={`Volume: ${volumePercentage}%`}
           onClick={toggleMute}
-          className="ml-2 text-base text-moonlit-silver text-full focus:outline-none focus:ring-1 focus:ring-turquoise-tide focus:ring-opacity-50 rounded-full p-1"
+          className={`ml-2 text-base ${theme.textSecondary} text-full focus:outline-none focus:ring-1 focus:ring-opacity-50 rounded-full p-1`}
         >
           {getVolumeIcon()}
-        </button>
+        </motion.button>
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
-          className="rounded-xl px-2 py-1 w-40 mr-2 bg-black shadow-lg will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade"
+          className="rounded-xl px-2 py-1 w-40 mr-2 bg-black bg-opacity-80 backdrop-blur-sm shadow-lg will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade"
           sideOffset={10}
           aria-label="Volume slider"
         >
           <div title={`Volume: ${volumePercentage}%`} className="py-2">
             <RangeSlider volume={volume} setVolume={setVolume} />
           </div>
-          <Popover.Arrow className="fill-black" />
+          <Popover.Arrow className="fill-black fill-opacity-80" />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
