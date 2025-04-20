@@ -120,7 +120,7 @@ const Timer = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.4 }}
             >
               <Progressbar completed={pomoCount} />
             </motion.div>
@@ -128,10 +128,25 @@ const Timer = () => {
         </AnimatePresence>
 
         <motion.section
-          initial={{ scale: 0.9, opacity: 0 }}
+          initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          className={`max-w-[660px] scale-95 _410:scale-100 px-10 py-8 flex justify-center ring-1 ${theme.timerBg} ${theme.border} ring-opacity-10 rounded-3xl sm:rounded-[52px] relative backdrop-blur-md shadow-lg transition-colors duration-300`}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+            delay: 0.1,
+          }}
+          className={`
+            max-w-[660px] scale-95 _410:scale-100 
+            px-10 py-8 flex justify-center 
+            ${theme.timerBg} 
+            border ${theme.border}
+            shadow-lg backdrop-blur-md
+            rounded-3xl sm:rounded-[52px] 
+            relative
+            transition-all duration-500
+            hover:shadow-xl
+          `}
         >
           <div className="flex flex-col relative items-center">
             <UtilityBtn
@@ -152,7 +167,7 @@ const Timer = () => {
                   key={`min-${min}`}
                   initial={{ opacity: 0.7, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.3 }}
                 >
                   {min < 10 ? `0${min}` : min}
                 </motion.p>
@@ -160,11 +175,11 @@ const Timer = () => {
 
               <div>
                 <motion.p
-                  className={`sm:text-[182px] text-8xl sm:w-56 text-[90px] font-semibold sm:font-medium ${theme.textPrimary}`}
+                  className={`sm:text-[182px] sm:w-56 text-[90px] font-semibold sm:font-medium ${theme.textPrimary}`}
                   key={`sec-${secs}`}
                   initial={{ opacity: 0.7, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.3 }}
                 >
                   {secs < 10 ? `0${secs}` : secs}
                 </motion.p>
