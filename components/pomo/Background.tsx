@@ -1,17 +1,15 @@
-import React, { FC } from 'react'
+import { FC, ReactNode } from "react";
 
 interface BackgroundProps {
-  children: React.ReactNode
+  children: ReactNode;
 }
 
-const Background:FC<BackgroundProps> = ({children}) => {
+const Background: FC<BackgroundProps> = ({ children }) => {
   return (
     <div className="bg-midnight-moss">
-      <div className="xbg-forest bg-cover bg-center">
-        {children}
-      </div>
+      <div className="min-h-screen">{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Background
+export default Background;
